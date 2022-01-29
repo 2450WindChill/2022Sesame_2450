@@ -4,18 +4,23 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class. Runs the motors with tank
  * steering and an Xbox controller.
  */
 public class Robot extends TimedRobot {
-  private final PWMSparkMax m_leftMotor = new PWMSparkMax(0);
-  private final PWMSparkMax m_rightMotor = new PWMSparkMax(1);
+  //private final PWMSparkMax m_leftMotor = new PWMSparkMax(0);
+  //private final PWMSparkMax m_rightMotor = new PWMSparkMax(1);
+  public final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(1);
+  public final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(2);
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
   private final XboxController m_driverController = new XboxController(0);
 

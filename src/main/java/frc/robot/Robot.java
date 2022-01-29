@@ -9,7 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 
 /**
@@ -17,11 +17,15 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
  * steering and an Xbox controller.
  */
 public class Robot extends TimedRobot {
-  //private final PWMSparkMax m_leftMotor = new PWMSparkMax(0);
-  //private final PWMSparkMax m_rightMotor = new PWMSparkMax(1);
+  public final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(1);
+  public final WPI_TalonSRX m_rightMotor2 = new WPI_TalonSRX(2);
+  public final MotorControllerGroup rightMotorGroup = new MotorControllerGroup(m_rightMotor, m_rightMotor2);
+
   public final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(3);
-  public final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(2);
-  private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+  public final WPI_TalonSRX m_leftMotor2 = new WPI_TalonSRX(4);
+  public final MotorControllerGroup leftMotorGroup = new MotorControllerGroup(m_leftMotor, m_leftMotor2);
+  
+  private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
   private final XboxController m_driverController = new XboxController(0);
 
   @Override

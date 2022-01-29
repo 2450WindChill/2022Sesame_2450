@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
 public class Robot extends TimedRobot {
   //private final PWMSparkMax m_leftMotor = new PWMSparkMax(0);
   //private final PWMSparkMax m_rightMotor = new PWMSparkMax(1);
-  public final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(1);
+  public final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(3);
   public final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(2);
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(m_leftMotor, m_rightMotor);
   private final XboxController m_driverController = new XboxController(0);

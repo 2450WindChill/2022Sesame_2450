@@ -34,6 +34,7 @@ public class SpinShooter extends CommandBase {
   public void initialize() {
     m_subsystem.m_topWheel.set(-0.8);
     m_subsystem.m_bottomWheel.set(0.8);
+    System.out.println("Running");
   }
 
   // Called every time the scheduler runs while the command is scheduled.

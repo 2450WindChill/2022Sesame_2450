@@ -46,12 +46,12 @@ public class Robot extends TimedRobot {
 
   private void configureButtons() {
     // B Button Shooter
-    System.out.print("About to configure buttons");
+    System.out.println("ABOUT TO CONFIGURE BUTTONS");
     new JoystickButton(m_driverController, Button.kB.value).toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
-    System.out.print("Configuring buttons");
+    System.out.println("CONFIGURING BUTTONS");
 
   }
-  
+
   @Override
   public void teleopPeriodic() {
     // Drive with tank drive.

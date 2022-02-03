@@ -8,8 +8,12 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.SpinShooter;
+import frc.robot.subsystems.ShooterSubsystem;
 
 
 /**
@@ -28,6 +32,8 @@ public class Robot extends TimedRobot {
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
   private final XboxController m_driverController = new XboxController(0);
 
+  public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
+
   @Override
   public void robotInit() {
     // We need to invert one side of the drivetrain so that positive voltages
@@ -35,6 +41,12 @@ public class Robot extends TimedRobot {
     // gearbox is constructed, you might have to invert the left side instead.
     m_leftMotor.setInverted(true);
     m_leftMotor2.setInverted(true);
+    configureButtons();
+  }
+
+  private void configureButtons() {
+    // B Button Shooter
+    new JoystickButton(m_driverController, Button.kB.value).toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
   }
 
   @Override

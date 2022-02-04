@@ -11,7 +11,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.EmptyCommand;
 import frc.robot.commands.SpinShooter;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -31,8 +33,10 @@ public class Robot extends TimedRobot {
   
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
   public final XboxController m_driverController = new XboxController(0);
+  final JoystickButton b = new JoystickButton(m_driverController, 2);
 
   public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
+  public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
 
   @Override
   public void robotInit() {
@@ -41,7 +45,8 @@ public class Robot extends TimedRobot {
     // gearbox is constructed, you might have to invert the left side instead.
     m_leftMotor.setInverted(true);
     m_leftMotor2.setInverted(true);
-    configureButtons();
+    m_ShooterSubsystem.setDefaultCommand(empty);
+    b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
   }
 
   private void configureButtons() {
@@ -49,6 +54,9 @@ public class Robot extends TimedRobot {
     System.out.println("ABOUT TO CONFIGURE BUTTONS");
     new JoystickButton(m_driverController, Button.kB.value).toggleWhenActive(new SpinShooter(m_ShooterSubsystem));
     System.out.println("CONFIGURING BUTTONS");
+
+    new JoystickButton(m_driverController, Button.kB.value).whenPressed(new SpinShooter(m_ShooterSubsystem));
+    System.out.print("Configuring buttons");
 
   }
 
@@ -60,6 +68,6 @@ public class Robot extends TimedRobot {
     // of the robot forward and backward, and the Y axis of the right stick
     // moves the right side of the robot forward and backward.
     m_robotDrive.tankDrive(m_driverController.getLeftY(), m_driverController.getRightY());
-    System.out.println("Value of B button: " + m_driverController.getYButton());
+    System.out.println("Value of B button: " + m_driverController.getBButton());
   }
 }

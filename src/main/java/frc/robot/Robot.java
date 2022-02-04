@@ -47,13 +47,12 @@ public class Robot extends TimedRobot {
     m_leftMotor2.setInverted(true);
     m_ShooterSubsystem.setDefaultCommand(empty);
     b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
+    //configureButtons();
   }
 
   private void configureButtons() {
     // B Button Shooter
-    System.out.println("ABOUT TO CONFIGURE BUTTONS");
-    new JoystickButton(m_driverController, Button.kB.value).toggleWhenActive(new SpinShooter(m_ShooterSubsystem));
-    System.out.println("CONFIGURING BUTTONS");
+    System.out.print("About to configure buttons");
 
     new JoystickButton(m_driverController, Button.kB.value).whenPressed(new SpinShooter(m_ShooterSubsystem));
     System.out.print("Configuring buttons");

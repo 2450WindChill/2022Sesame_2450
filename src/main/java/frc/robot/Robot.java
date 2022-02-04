@@ -30,7 +30,7 @@ public class Robot extends TimedRobot {
   public final MotorControllerGroup leftMotorGroup = new MotorControllerGroup(m_leftMotor, m_leftMotor2);
   
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
-  private final XboxController m_driverController = new XboxController(0);
+  public final XboxController m_driverController = new XboxController(0);
 
   public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
 
@@ -47,10 +47,11 @@ public class Robot extends TimedRobot {
   private void configureButtons() {
     // B Button Shooter
     System.out.println("ABOUT TO CONFIGURE BUTTONS");
-    new JoystickButton(m_driverController, Button.kB.value).toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
+    new JoystickButton(m_driverController, Button.kB.value).toggleWhenActive(new SpinShooter(m_ShooterSubsystem));
     System.out.println("CONFIGURING BUTTONS");
 
   }
+
 
   @Override
   public void teleopPeriodic() {
@@ -59,5 +60,6 @@ public class Robot extends TimedRobot {
     // of the robot forward and backward, and the Y axis of the right stick
     // moves the right side of the robot forward and backward.
     m_robotDrive.tankDrive(m_driverController.getLeftY(), m_driverController.getRightY());
+    System.out.println("Value of B button: " + m_driverController.getYButton());
   }
 }

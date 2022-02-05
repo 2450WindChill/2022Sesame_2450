@@ -39,7 +39,7 @@ public class ExampleCommand extends CommandBase {
   public void execute() {
     m_subsystem.m_conveyer.set(Constants.conveyerSpeed);
   }
-
+  
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {

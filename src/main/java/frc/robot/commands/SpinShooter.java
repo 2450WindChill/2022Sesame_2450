@@ -7,9 +7,9 @@
 
 package frc.robot.commands;
 
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 
 /**
  * An example command that uses an example subsystem.
@@ -33,8 +33,8 @@ public class SpinShooter extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("RUNNING");
-    m_subsystem.m_topWheel.set(-0.5);
-    m_subsystem.m_bottomWheel.set(0.5);
+    m_subsystem.m_topWheel.set(-1 * Constants.shootSpeed);
+    m_subsystem.m_bottomWheel.set(Constants.shootSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

@@ -35,6 +35,8 @@ public class Robot extends TimedRobot {
   public final XboxController m_driverController = new XboxController(0);
   final JoystickButton b = new JoystickButton(m_driverController, 2);
 
+  public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
+
   public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
 
@@ -53,7 +55,7 @@ public class Robot extends TimedRobot {
   private void configureButtons() {
     // B Button Shooter
     System.out.println("About to configure buttons");
-    new JoystickButton(m_driverController, Button.kB.value).whenPressed(new SpinShooter(m_ShooterSubsystem));
+    m_bButton.whenPressed(new SpinShooter(m_ShooterSubsystem));
     System.out.println("Configuring buttons");
 
   }

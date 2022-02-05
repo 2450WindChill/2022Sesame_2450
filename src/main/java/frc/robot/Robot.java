@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
   public final XboxController m_driverController = new XboxController(0);
-  final JoystickButton b = new JoystickButton(m_driverController, 2);
+  //final JoystickButton b = new JoystickButton(m_driverController, 2);
 
   public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
 
@@ -48,7 +48,7 @@ public class Robot extends TimedRobot {
     m_leftMotor.setInverted(true);
     m_leftMotor2.setInverted(true);
     //m_ShooterSubsystem.setDefaultCommand(empty);
-    b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
+    //b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
     configureButtons();
   }
 

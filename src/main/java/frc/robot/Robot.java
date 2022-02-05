@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   public final MotorControllerGroup rightMotorGroup = new MotorControllerGroup(m_rightMotor, m_rightMotor2);
 
   public final CANSparkMax m_leftMotor = new CANSparkMax(2, MotorType.kBrushless);
-  public final CANSparkMax m_leftMotor2 = CANSparkMax(3, MotorType.kBrushless);
+  public final CANSparkMax m_leftMotor2 = new CANSparkMax(3, MotorType.kBrushless);
   public final MotorControllerGroup leftMotorGroup = new MotorControllerGroup(m_leftMotor, m_leftMotor2);
   
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);

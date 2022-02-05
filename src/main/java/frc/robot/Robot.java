@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.EmptyCommand;
+//import frc.robot.commands.EmptyCommand;
 import frc.robot.commands.SpinShooter;
 import frc.robot.subsystems.ShooterSubsystem;
 
@@ -36,7 +36,7 @@ public class Robot extends TimedRobot {
   final JoystickButton b = new JoystickButton(m_driverController, 2);
 
   public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
-  public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
+  //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
 
   @Override
   public void robotInit() {
@@ -45,17 +45,17 @@ public class Robot extends TimedRobot {
     // gearbox is constructed, you might have to invert the left side instead.
     m_leftMotor.setInverted(true);
     m_leftMotor2.setInverted(true);
-    m_ShooterSubsystem.setDefaultCommand(empty);
+    //m_ShooterSubsystem.setDefaultCommand(empty);
     b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
-    //configureButtons();
+    configureButtons();
   }
 
   private void configureButtons() {
     // B Button Shooter
-    System.out.print("About to configure buttons");
+    System.out.println("About to configure buttons");
 
     new JoystickButton(m_driverController, Button.kB.value).whenPressed(new SpinShooter(m_ShooterSubsystem));
-    System.out.print("Configuring buttons");
+    System.out.println("Configuring buttons");
 
   }
 

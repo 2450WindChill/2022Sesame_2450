@@ -26,12 +26,12 @@ import frc.robot.subsystems.ShooterSubsystem;
  * steering and an Xbox controller.
  */
 public class Robot extends TimedRobot {
-  public final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(1);
-  public final WPI_TalonSRX m_rightMotor2 = new WPI_TalonSRX(2);
+  public final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(0);
+  public final WPI_TalonSRX m_rightMotor2 = new WPI_TalonSRX(1);
   public final MotorControllerGroup rightMotorGroup = new MotorControllerGroup(m_rightMotor, m_rightMotor2);
 
-  public final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(3);
-  public final WPI_TalonSRX m_leftMotor2 = new WPI_TalonSRX(4);
+  public final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(2);
+  public final WPI_TalonSRX m_leftMotor2 = new WPI_TalonSRX(3);
   public final MotorControllerGroup leftMotorGroup = new MotorControllerGroup(m_leftMotor, m_leftMotor2);
   
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);

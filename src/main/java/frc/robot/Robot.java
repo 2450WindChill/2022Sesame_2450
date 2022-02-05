@@ -53,7 +53,6 @@ public class Robot extends TimedRobot {
   private void configureButtons() {
     // B Button Shooter
     System.out.println("About to configure buttons");
-
     new JoystickButton(m_driverController, Button.kB.value).whenPressed(new SpinShooter(m_ShooterSubsystem));
     System.out.println("Configuring buttons");
 

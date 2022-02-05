@@ -7,9 +7,12 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ExampleSubsystem extends SubsystemBase {
+  public final WPI_TalonSRX m_conveyer = new WPI_TalonSRX(7);
   /**
    * Creates a new ExampleSubsystem.
    */

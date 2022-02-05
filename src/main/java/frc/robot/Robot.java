@@ -68,6 +68,6 @@ public class Robot extends TimedRobot {
     // of the robot forward and backward, and the Y axis of the right stick
     // moves the right side of the robot forward and backward.
     m_robotDrive.tankDrive(m_driverController.getLeftY(), m_driverController.getRightY());
-    System.out.println("Value of B button: " + m_driverController.getBButton());
+    //System.out.println("Value of B button: " + m_driverController.getBButton());
   }
 }

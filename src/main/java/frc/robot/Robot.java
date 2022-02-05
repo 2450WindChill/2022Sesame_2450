@@ -14,8 +14,10 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ParallelExample;
 //import frc.robot.commands.EmptyCommand;
 import frc.robot.commands.SpinShooter;
+import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 
 
@@ -39,6 +41,7 @@ public class Robot extends TimedRobot {
   public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
 
   public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
+  public final ExampleSubsystem m_ExampleSubsystem = new ExampleSubsystem();
   //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
 
   @Override
@@ -56,7 +59,7 @@ public class Robot extends TimedRobot {
   private void configureButtons() {
     // B Button Shooter
     System.out.println("About to configure buttons");
-    m_bButton.whenHeld(new SpinShooter(m_ShooterSubsystem));
+    m_bButton.whenHeld(new ParallelExample(m_ShooterSubsystem, m_ExampleSubsystem));
     System.out.println("Configuring buttons");
 
   }
@@ -65,7 +68,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
   }
-
+  
 
   @Override
   public void teleopPeriodic() {

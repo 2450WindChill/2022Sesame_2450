@@ -19,19 +19,21 @@ import frc.robot.commands.ParallelExample;
 import frc.robot.commands.SpinShooter;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
-
+import com.revrobotics.REVLibError;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 /**
  * This is a demo program showing the use of the DifferentialDrive class. Runs the motors with tank
  * steering and an Xbox controller.
  */
 public class Robot extends TimedRobot {
-  public final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(0);
-  public final WPI_TalonSRX m_rightMotor2 = new WPI_TalonSRX(1);
+  public final CANSparkMax m_rightMotor = new CANSparkMax(0, MotorType.kBrushless);
+  public final CANSparkMax m_rightMotor2 = new CANSparkMax(1, MotorType.kBrushless);
   public final MotorControllerGroup rightMotorGroup = new MotorControllerGroup(m_rightMotor, m_rightMotor2);
 
-  public final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(2);
-  public final WPI_TalonSRX m_leftMotor2 = new WPI_TalonSRX(3);
+  public final CANSparkMax m_leftMotor = new CANSparkMax(2, MotorType.kBrushless);
+  public final CANSparkMax m_leftMotor2 = CANSparkMax(3, MotorType.kBrushless);
   public final MotorControllerGroup leftMotorGroup = new MotorControllerGroup(m_leftMotor, m_leftMotor2);
   
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
@@ -54,6 +56,10 @@ public class Robot extends TimedRobot {
     //m_ShooterSubsystem.setDefaultCommand(empty);
     //b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem)); 
     configureButtons();
+  }
+
+  private com.revrobotics.CANSparkMax CANSparkMax(int i, MotorType kbrushless) {
+    return null;
   }
 
   private void configureButtons() {

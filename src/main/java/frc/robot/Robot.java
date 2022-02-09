@@ -25,22 +25,31 @@ import com.revrobotics.CANSparkMax;
  * This is a demo program showing the use of the DifferentialDrive class. Runs the motors with tank
  * steering and an Xbox controller.
  */
+
+ // Defining motors and putting the right motors in a motor control group
 public class Robot extends TimedRobot {
   public final CANSparkMax m_rightMotor = new CANSparkMax(1, MotorType.kBrushless);
   public final CANSparkMax m_rightMotor2 = new CANSparkMax(2, MotorType.kBrushless);
   public final MotorControllerGroup rightMotorGroup = new MotorControllerGroup(m_rightMotor, m_rightMotor2);
 
-
+// Defining motors and putting the left motors in a motor control group
   public final CANSparkMax m_leftMotor = new CANSparkMax(3, MotorType.kBrushless);
   public final CANSparkMax m_leftMotor2 = new CANSparkMax(4, MotorType.kBrushless);
   public final MotorControllerGroup leftMotorGroup = new MotorControllerGroup(m_leftMotor, m_leftMotor2);
   
+  // Takes motor control groups and puts them in a differential drive
+  // Putting motors into different motor groups
+  // Confused about this code
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
+
+  // Defining where the xbox controller is plugged in
   public final XboxController m_driverController = new XboxController(0);
   //final JoystickButton b = new JoystickButton(m_driverController, 2);
 
+  // Defining the b button 
   public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
 
+  // Confused
   public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   public final ExampleSubsystem m_ExampleSubsystem = new ExampleSubsystem();
   //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
@@ -57,6 +66,7 @@ public class Robot extends TimedRobot {
     configureButtons();
   }
 
+  // Configures buttons using parallel command
   private void configureButtons() {
     // B Button Shooter
     System.out.println("About to configure buttons");
@@ -65,12 +75,12 @@ public class Robot extends TimedRobot {
 
   }
 
+  // Runs a scheduler
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
   }
   
-
   @Override
   public void teleopPeriodic() {
     // Drive with tank drive.

@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -15,6 +18,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ParallelExample;
+import frc.robot.commands.PneumaticsExample;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 //import com.revrobotics.REVLibError;
@@ -26,8 +30,11 @@ import com.revrobotics.CANSparkMax;
  * steering and an Xbox controller.
  */
 
- // Defining motors and putting the right motors in a motor control group
+ 
 public class Robot extends TimedRobot {
+  Compressor phCompressor = new Compressor(0, PneumaticsModuleType.REVPH);
+
+  // Defining motors and putting the right motors in a motor control group
   public final CANSparkMax m_rightMotor = new CANSparkMax(1, MotorType.kBrushless);
   public final CANSparkMax m_rightMotor2 = new CANSparkMax(2, MotorType.kBrushless);
   public final MotorControllerGroup rightMotorGroup = new MotorControllerGroup(m_rightMotor, m_rightMotor2);
@@ -63,6 +70,7 @@ public class Robot extends TimedRobot {
     m_leftMotor2.setInverted(true);
     //m_ShooterSubsystem.setDefaultCommand(empty);
     //b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem)); 
+    phCompressor.enableDigital();
     configureButtons();
   }
 
@@ -70,7 +78,8 @@ public class Robot extends TimedRobot {
   private void configureButtons() {
     // B Button Shooter
     System.out.println("About to configure buttons");
-    m_bButton.whenHeld(new ParallelExample(m_ShooterSubsystem, m_ExampleSubsystem));
+    // m_bButton.whenHeld(new ParallelExample(m_ShooterSubsystem, m_ExampleSubsystem));
+    m_bButton.whenHeld(new PneumaticsExample());
     System.out.println("Configuring buttons");
 
   }

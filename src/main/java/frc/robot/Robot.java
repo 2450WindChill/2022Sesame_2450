@@ -32,16 +32,16 @@ import com.revrobotics.CANSparkMax;
 
  
 public class Robot extends TimedRobot {
-  Compressor phCompressor = new Compressor(0, PneumaticsModuleType.REVPH);
+  // Compressor phCompressor = new Compressor(0, PneumaticsModuleType.REVPH);
 
   // Defining motors and putting the right motors in a motor control group
-  public final CANSparkMax m_rightMotor = new CANSparkMax(1, MotorType.kBrushless);
-  public final CANSparkMax m_rightMotor2 = new CANSparkMax(2, MotorType.kBrushless);
+  public final CANSparkMax m_rightMotor = new CANSparkMax(1, MotorType.kBrushed);
+  public final CANSparkMax m_rightMotor2 = new CANSparkMax(2, MotorType.kBrushed);
   public final MotorControllerGroup rightMotorGroup = new MotorControllerGroup(m_rightMotor, m_rightMotor2);
 
 // Defining motors and putting the left motors in a motor control group
-  public final CANSparkMax m_leftMotor = new CANSparkMax(3, MotorType.kBrushless);
-  public final CANSparkMax m_leftMotor2 = new CANSparkMax(4, MotorType.kBrushless);
+  public final CANSparkMax m_leftMotor = new CANSparkMax(3, MotorType.kBrushed);
+  public final CANSparkMax m_leftMotor2 = new CANSparkMax(4, MotorType.kBrushed);
   public final MotorControllerGroup leftMotorGroup = new MotorControllerGroup(m_leftMotor, m_leftMotor2);
   
   // Takes motor control groups and puts them in a differential drive
@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
     m_leftMotor2.setInverted(true);
     //m_ShooterSubsystem.setDefaultCommand(empty);
     //b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem)); 
-    phCompressor.enableDigital();
+    // phCompressor.enableDigital();
     configureButtons();
   }
 

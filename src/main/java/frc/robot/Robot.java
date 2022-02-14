@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ParallelExample;
+// import frc.robot.commands.ParallelExample;
 import frc.robot.commands.PneumaticsExample;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
@@ -32,7 +32,7 @@ import com.revrobotics.CANSparkMax;
 
  
 public class Robot extends TimedRobot {
-  // Compressor phCompressor = new Compressor(0, PneumaticsModuleType.REVPH);
+  Compressor phCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   // Defining motors and putting the right motors in a motor control group
   public final CANSparkMax m_rightMotor = new CANSparkMax(1, MotorType.kBrushed);
@@ -66,11 +66,13 @@ public class Robot extends TimedRobot {
     // We need to invert one side of the drivetrain so that positive voltages
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
-    m_leftMotor.setInverted(true);
-    m_leftMotor2.setInverted(true);
+    m_rightMotor.setInverted(true);
+    m_rightMotor2.setInverted(true);
     //m_ShooterSubsystem.setDefaultCommand(empty);
     //b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem)); 
-    // phCompressor.enableDigital();
+    phCompressor.enableDigital();
+    
+    // phCompressor.disable();
     configureButtons();
   }
 
@@ -79,7 +81,7 @@ public class Robot extends TimedRobot {
     // B Button Shooter
     System.out.println("About to configure buttons");
     // m_bButton.whenHeld(new ParallelExample(m_ShooterSubsystem, m_ExampleSubsystem));
-    m_bButton.whenHeld(new PneumaticsExample());
+    m_bButton.whenPressed(new PneumaticsExample(m_ExampleSubsystem));
     System.out.println("Configuring buttons");
 
   }

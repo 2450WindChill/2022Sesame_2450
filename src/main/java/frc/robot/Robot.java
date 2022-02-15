@@ -32,7 +32,7 @@ import com.revrobotics.CANSparkMax;
 
  
 public class Robot extends TimedRobot {
-  Compressor phCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  //Compressor phCompressor = new Compressor(1, PneumaticsModuleType.CTREPCM);
 
   // Defining motors and putting the right motors in a motor control group
   public final CANSparkMax m_rightMotor = new CANSparkMax(1, MotorType.kBrushed);
@@ -49,31 +49,34 @@ public class Robot extends TimedRobot {
   // Confused about this code
   private final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
 
-  // Defining where the xbox controller is plugged in
+//   // Defining where the xbox controller is plugged in
   public final XboxController m_driverController = new XboxController(0);
-  //final JoystickButton b = new JoystickButton(m_driverController, 2);
+//   //final JoystickButton b = new JoystickButton(m_driverController, 2);
 
   // Defining the b button 
-  public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
+  // public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
 
   // Confused
-  public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
-  public final ExampleSubsystem m_ExampleSubsystem = new ExampleSubsystem();
+  // public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
+  // public final ExampleSubsystem m_ExampleSubsystem = new ExampleSubsystem();
   //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
-
+  public int x = 7;
   @Override
   public void robotInit() {
     // We need to invert one side of the drivetrain so that positive voltages
     // result in both sides moving forward. Depending on how your robot's
     // gearbox is constructed, you might have to invert the left side instead.
-    m_rightMotor.setInverted(true);
-    m_rightMotor2.setInverted(true);
+    m_rightMotor.setInverted(false);
+    m_rightMotor2.setInverted(false);
+
+    m_leftMotor.setInverted(false);
+    m_leftMotor2.setInverted(false);
     //m_ShooterSubsystem.setDefaultCommand(empty);
     //b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem)); 
-    phCompressor.enableDigital();
+    //phCompressor.enableDigital();
     
     // phCompressor.disable();
-    configureButtons();
+    // configureButtons();
   }
 
   // Configures buttons using parallel command
@@ -81,7 +84,7 @@ public class Robot extends TimedRobot {
     // B Button Shooter
     System.out.println("About to configure buttons");
     // m_bButton.whenHeld(new ParallelExample(m_ShooterSubsystem, m_ExampleSubsystem));
-    m_bButton.whenPressed(new PneumaticsExample(m_ExampleSubsystem));
+    // m_bButton.whenPressed(new PneumaticsExample(m_ExampleSubsystem));
     System.out.println("Configuring buttons");
 
   }
@@ -98,6 +101,7 @@ public class Robot extends TimedRobot {
     // That means that the Y axis of the left stick moves the left side
     // of the robot forward and backward, and the Y axis of the right stick
     // moves the right side of the robot forward and backward.
+    System.out.println("Testing " + ++x);
     m_robotDrive.tankDrive(m_driverController.getLeftY(), m_driverController.getRightY());
     //System.out.println("Value of B button: " + m_driverController.getBButton());
   }

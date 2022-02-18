@@ -47,7 +47,7 @@ public class DriveForward extends CommandBase {
   public void execute() {
     System.out.println("Executing robot");
     m_robot.leftMotorGroup.set(Constants.autoDriveSpeed);
-    m_robot.rightMotorGroup.set(-Constants.autoDriveSpeed);
+    m_robot.rightMotorGroup.set(Constants.autoDriveSpeed);
   }
 
   // Called once the command ends or is interrupted.

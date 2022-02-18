@@ -18,8 +18,11 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.ClimberStep1Command;
+import frc.robot.commands.ClimberStep2Command;
 // import frc.robot.commands.ParallelExample;
 import frc.robot.commands.PneumaticsExample;
+import frc.robot.subsystems.ClimberStep1;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 //import com.revrobotics.REVLibError;
@@ -55,11 +58,13 @@ public class Robot extends TimedRobot {
 //   //final JoystickButton b = new JoystickButton(m_driverController, 2);
 
   // Defining the b button 
-  // public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
+  public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
+  public final JoystickButton m_aButton = new JoystickButton(m_driverController, Button.kA.value);
 
   // Confused
   // public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   // public final ExampleSubsystem m_ExampleSubsystem = new ExampleSubsystem();
+  public final ClimberStep1 m_ClimberStep1 = new ClimberStep1();
   //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);  
   public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
   @Override
@@ -77,7 +82,7 @@ public class Robot extends TimedRobot {
     //phCompressor.enableDigital();
     
     // phCompressor.disable();
-    // configureButtons();
+    configureButtons();
   }
 
   // Configures buttons using parallel command
@@ -86,10 +91,11 @@ public class Robot extends TimedRobot {
     System.out.println("About to configure buttons");
     // m_bButton.whenHeld(new ParallelExample(m_ShooterSubsystem, m_ExampleSubsystem));
     // m_bButton.whenPressed(new PneumaticsExample(m_ExampleSubsystem));
+    m_aButton.whenHeld(new ClimberStep1Command(m_ClimberStep1));
+    m_bButton.whenHeld(new ClimberStep2Command(m_ClimberStep1));
     System.out.println("Configuring buttons");
 
   }
-
   // Runs a scheduler
   @Override
   public void robotPeriodic() {

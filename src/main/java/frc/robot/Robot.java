@@ -4,7 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
+//import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 //import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.AutonomousCommand;
 // import frc.robot.commands.ParallelExample;
 import frc.robot.commands.PneumaticsExample;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -59,8 +60,8 @@ public class Robot extends TimedRobot {
   // Confused
   // public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   // public final ExampleSubsystem m_ExampleSubsystem = new ExampleSubsystem();
-  //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);
-  public int x = 7;
+  //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);  
+  public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
   @Override
   public void robotInit() {
     // We need to invert one side of the drivetrain so that positive voltages
@@ -101,8 +102,14 @@ public class Robot extends TimedRobot {
     // That means that the Y axis of the left stick moves the left side
     // of the robot forward and backward, and the Y axis of the right stick
     // moves the right side of the robot forward and backward.
-    System.out.println("Testing " + ++x);
     m_robotDrive.tankDrive(m_driverController.getLeftY(), m_driverController.getRightY());
     //System.out.println("Value of B button: " + m_driverController.getBButton());
+  }
+
+  @Override
+  public void autonomousInit() {
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
   }
 }

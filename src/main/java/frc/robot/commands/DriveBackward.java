@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class DriveForward extends CommandBase {
+public class DriveBackward extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final Robot m_robot;
   private Delay d;
@@ -27,7 +27,7 @@ public class DriveForward extends CommandBase {
 
   private long time = Constants.autoDriveTime;
 
-  public DriveForward(Robot robot) {
+  public DriveBackward(Robot robot) {
     m_robot = robot;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements();

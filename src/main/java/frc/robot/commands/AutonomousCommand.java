@@ -8,7 +8,7 @@ public class AutonomousCommand extends SequentialCommandGroup {
 
   public AutonomousCommand(Robot m_robot) {
     addCommands(
-      new DriveForward(m_robot)
+      new DriveBackward(m_robot)
     );
   }
 }

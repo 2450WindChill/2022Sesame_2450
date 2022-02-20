@@ -4,6 +4,11 @@
 
 package frc.robot;
 
+import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
+import edu.wpi.first.cscore.MjpegServer;
+import edu.wpi.first.cscore.UsbCamera;
 //import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
@@ -82,6 +87,11 @@ public class Robot extends TimedRobot {
     //phCompressor.enableDigital();
     
     // phCompressor.disable();
+
+
+    
+    CameraServer.startAutomaticCapture();
+
     configureButtons();
   }
 
@@ -108,7 +118,7 @@ public class Robot extends TimedRobot {
     // That means that the Y axis of the left stick moves the left side
     // of the robot forward and backward, and the Y axis of the right stick
     // moves the right side of the robot forward and backward.
-    m_robotDrive.tankDrive(m_driverController.getLeftY(), m_driverController.getRightY());
+    m_robotDrive.tankDrive(m_driverController.getLeftY()*0.8, m_driverController.getRightY()*0.8);
     //System.out.println("Value of B button: " + m_driverController.getBButton());
   }
 

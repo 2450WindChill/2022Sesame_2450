@@ -4,24 +4,24 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
 
-public class PneumaticsExample extends CommandBase{
+public class PneumaticsCommand extends CommandBase{
 
-    private final ExampleSubsystem m_subsystem; 
+    private final PneumaticsSubsystem m_subsystem; 
     DoubleSolenoid.Value val; 
-    public PneumaticsExample(ExampleSubsystem subsystem){
+    public PneumaticsCommand(PneumaticsSubsystem subsystem){
         m_subsystem = subsystem;
     }
     @Override
     public void initialize() {
         System.out.println("Pneumatics command activated!");
-        val = m_subsystem.exampleDouble.get();
-        if (val == DoubleSolenoid.Value.kForward) {
-        m_subsystem.exampleDouble.set(DoubleSolenoid.Value.kReverse);
+        // val = m_subsystem.exampleDouble.get();
+        if (val == Value.kForward) {
+        // m_subsystem.exampleDouble.set(Value.kReverse);
         
       } else {
-        m_subsystem.exampleDouble.set(DoubleSolenoid.Value.kForward);
+        // m_subsystem.exampleDouble.set(Value.kForward);
 
       }
     }
@@ -31,7 +31,7 @@ public class PneumaticsExample extends CommandBase{
     }
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.exampleDouble.set(DoubleSolenoid.Value.kOff);
+        // m_subsystem.exampleDouble.set(DoubleSolenoid.Value.kOff);
     }
     @Override
     public boolean isFinished() {

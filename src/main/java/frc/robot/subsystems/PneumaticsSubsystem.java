@@ -7,19 +7,17 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class ExampleSubsystem extends SubsystemBase {
-  public final WPI_TalonSRX m_conveyer = new WPI_TalonSRX(7);
-  public final DoubleSolenoid exampleDouble = new DoubleSolenoid(5, PneumaticsModuleType.CTREPCM, 2, 3);
+public class PneumaticsSubsystem extends SubsystemBase {
+  public final DoubleSolenoid exampleDouble = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
   /**
    * Creates a new ExampleSubsystem.
    */
-  public ExampleSubsystem() {
+  public PneumaticsSubsystem() {
 
   }
 

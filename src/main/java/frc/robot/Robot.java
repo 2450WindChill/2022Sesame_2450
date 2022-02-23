@@ -41,7 +41,7 @@ import com.revrobotics.CANSparkMax;
 
  
 public class Robot extends TimedRobot {
-  Compressor phCompressor = new Compressor(7, PneumaticsModuleType.CTREPCM);
+  Compressor phCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
   // Defining motors and putting the right motors in a motor control group
   public final CANSparkMax m_rightMotor = new CANSparkMax(1, MotorType.kBrushed);

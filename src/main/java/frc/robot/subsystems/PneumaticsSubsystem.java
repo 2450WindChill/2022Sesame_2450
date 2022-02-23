@@ -13,13 +13,14 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class PneumaticsSubsystem extends SubsystemBase {
-  public final DoubleSolenoid exampleDouble = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 0, 1);
+  public final DoubleSolenoid exampleDouble = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 2, 3);
   /**
    * Creates a new ExampleSubsystem.
    */
   public PneumaticsSubsystem() {
 
   }
+
 
   @Override
   public void periodic() {

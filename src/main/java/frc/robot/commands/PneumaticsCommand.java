@@ -13,26 +13,37 @@ public class PneumaticsCommand extends CommandBase{
     public PneumaticsCommand(PneumaticsSubsystem subsystem){
         m_subsystem = subsystem;
     }
+    
+    
     @Override
     public void initialize() {
         System.out.println("Pneumatics command activated!");
-        // val = m_subsystem.exampleDouble.get();
-        if (val == Value.kForward) {
-        // m_subsystem.exampleDouble.set(Value.kReverse);
-        
-      } else {
+        val = m_subsystem.exampleDouble.get();
+        m_subsystem.exampleDouble.set(Value.kForward);
+       // if (val == Value.kForward) {
+        //m_subsystem.exampleDouble.set(Value.kReverse);
+      //} else {
         // m_subsystem.exampleDouble.set(Value.kForward);
 
-      }
+    //   }
     }
+    
+    
+    
     @Override
     public void execute() {
-        
+        System.out.println("Executing Pneumatics Command");
     }
+
+
+
     @Override
     public void end(boolean interrupted) {
-        // m_subsystem.exampleDouble.set(DoubleSolenoid.Value.kOff);
+        System.out.println("Ending Pneumatics Command");
+         m_subsystem.exampleDouble.set(DoubleSolenoid.Value.kOff);
     }
+
+
     @Override
     public boolean isFinished() {
         return true;

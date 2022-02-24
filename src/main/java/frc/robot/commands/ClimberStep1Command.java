@@ -1,7 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
-import frc.robot.subsystems.ClimberStep1;
+import frc.robot.subsystems.ClimberSubSystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
  */
 public class ClimberStep1Command extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
-  private final ClimberStep1 m_subsystem;
+  private final ClimberSubSystem m_subsystem;
 
   /**
    * Creates a new ExampleCommand.
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ClimberStep1Command(ClimberStep1 subsystem) {
+  public ClimberStep1Command(int extendDist, ClimberSubSystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);

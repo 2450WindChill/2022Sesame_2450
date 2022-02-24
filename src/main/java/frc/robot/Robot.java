@@ -27,7 +27,7 @@ import frc.robot.commands.ClimberStep1Command;
 import frc.robot.commands.ClimberStep2Command;
 // import frc.robot.commands.ParallelExample;
 import frc.robot.commands.PneumaticsCommand;
-import frc.robot.subsystems.ClimberStep1;
+import frc.robot.subsystems.ClimberSubSystem;
 import frc.robot.subsystems.PneumaticsSubsystem;
 import frc.robot.subsystems.ShooterSubsystem;
 //import com.revrobotics.REVLibError;
@@ -70,7 +70,7 @@ public class Robot extends TimedRobot {
   // Confused
   // public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
   public final PneumaticsSubsystem m_PneumaticsSubsystem = new PneumaticsSubsystem();
-  public final ClimberStep1 m_ClimberStep1 = new ClimberStep1();
+  public final ClimberSubSystem m_ClimberStep1 = new ClimberSubSystem();
   //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);  
   public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
   @Override

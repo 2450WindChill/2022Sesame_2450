@@ -10,6 +10,7 @@ import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.MjpegServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 //import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
@@ -23,13 +24,10 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.ClimberStep1Command;
-import frc.robot.commands.ClimberStep2Command;
+import frc.robot.commands.ExtendClimbCommand;
+import frc.robot.commands.RetractClimbCommand;
 // import frc.robot.commands.ParallelExample;
-import frc.robot.commands.PneumaticsCommand;
 import frc.robot.subsystems.ClimberSubSystem;
-import frc.robot.subsystems.PneumaticsSubsystem;
-import frc.robot.subsystems.ShooterSubsystem;
 //import com.revrobotics.REVLibError;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax;
@@ -63,14 +61,17 @@ public class Robot extends TimedRobot {
 //   //final JoystickButton b = new JoystickButton(m_driverController, 2);
 
   // Defining the b button 
-  public final JoystickButton m_aButton = new JoystickButton(m_driverController, Button.kA.value);
-  public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
-  public final JoystickButton m_xButton = new JoystickButton(m_driverController, Button.kX.value);
+  // public final JoystickButton m_aButton = new JoystickButton(m_driverController, Button.kA.value);
+  // public final JoystickButton m_bButton = new JoystickButton(m_driverController, Button.kB.value);
+  // public final JoystickButton m_xButton = new JoystickButton(m_driverController, Button.kX.value);
+
+  // Defining the joystick
+  public final Joystick xboxcontroller = new Joystick(0);
+  
 
   // Confused
   // public final ShooterSubsystem m_ShooterSubsystem = new ShooterSubsystem();
-  public final PneumaticsSubsystem m_PneumaticsSubsystem = new PneumaticsSubsystem();
-  public final ClimberSubSystem m_ClimberStep1 = new ClimberSubSystem();
+  public final ClimberSubSystem m_Climber = new ClimberSubSystem();
   //public final EmptyCommand empty = new EmptyCommand(m_ShooterSubsystem);  
   public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
   @Override
@@ -93,19 +94,18 @@ public class Robot extends TimedRobot {
     
     CameraServer.startAutomaticCapture();
 
-    configureButtons();
+    //configureButtons();
   }
 
-  // Configures buttons using parallel command
-  private void configureButtons() {
-    // B Button Shooter
-    System.out.println("About to configure buttons");
-    m_xButton.whenPressed(new PneumaticsCommand(m_PneumaticsSubsystem));
-    m_aButton.whenHeld(new ClimberStep1Command(m_ClimberStep1));
-    m_bButton.whenHeld(new ClimberStep2Command(m_ClimberStep1));
-    System.out.println("Configuring buttons");
+  // // Configures buttons using parallel command
+  // private void configureButtons() {
+  //   // B Button Shooter
+  //   System.out.println("About to configure buttons");
+  //   m_aButton.whenHeld(new ExtendClimbCommand(1, m_Climber));
+  //   m_bButton.whenHeld(new RetractClimbCommand(m_Climber));
+  //   System.out.println("Configuring buttons");
 
-  }
+  // }
   // Runs a scheduler
   @Override
   public void robotPeriodic() {

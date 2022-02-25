@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /**
  * An example command that uses an example subsystem.
  */
-public class ClimberStep2Command extends CommandBase {
+public class ExtendClimbCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubSystem m_subsystem;
 
@@ -16,7 +16,7 @@ public class ClimberStep2Command extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public ClimberStep2Command(ClimberSubSystem subsystem) {
+  public ExtendClimbCommand(int extendDist, ClimberSubSystem subsystem) {
     m_subsystem = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
@@ -31,7 +31,7 @@ public class ClimberStep2Command extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_subsystem.ClimberStep1Motor.set(-Constants.climbSpeed);
+    m_subsystem.ClimberStep1Motor.set(Constants.climbSpeed);
   }
   
   // Called once the command ends or is interrupted.

@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class ClimberSubSystem extends SubsystemBase {
@@ -13,4 +14,11 @@ public class ClimberSubSystem extends SubsystemBase {
     public ClimberSubSystem() {
 
     }
+
+    public void ManualExtendsInputs(XboxController xbox) {
+        // Unfinished need 'if' statement to check if value is negative or positive to
+        // use either ExtendClimbArm motor or RetractClimbArm motor
+        ExtendClimbArm.set(xbox.getRightX());
+    }
+
 }

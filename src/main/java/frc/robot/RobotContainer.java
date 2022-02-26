@@ -1,9 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
 
 package frc.robot;
 
@@ -36,10 +30,10 @@ public class RobotContainer {
   // Controllers
   public static XboxController xboxController = new XboxController(0);
   public final JoystickButton m_aButton = new JoystickButton(xboxController, Button.kA.value);
-
   public final JoystickButton m_bButton = new JoystickButton(xboxController, Button.kB.value);
-
+  public final JoystickButton m_yButton = new JoystickButton(xboxController, Button.kY.value);
   public final JoystickButton m_xButton = new JoystickButton(xboxController, Button.kX.value);
+
   public final JoystickButton m_triggerLeft = new JoystickButton(xboxController, 2);
   public final JoystickButton m_triggerRight = new JoystickButton(xboxController, 3);
 
@@ -50,63 +44,31 @@ public class RobotContainer {
   public final static ClimberSubSystem m_climbersubsystem = new ClimberSubSystem();
 
   // Commands
-  // public final DriveWithController drive = new
-  // DriveWithController(m_driveTrainSub);
   public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
-
   public RobotContainer() {
-    // We need to invert one side of the drivetrain so that positive voltages
-    // result in both sides moving forward. Depending on how your robot's
-    // gearbox is constructed, you might have to invert the left side instead.
 
-    // m_ShooterSubsystem.setDefaultCommand(empty);
-    // b.toggleWhenPressed(new SpinShooter(m_ShooterSubsystem));
     phCompressor.enableDigital();
 
-    // phCompressor.disable();
-    // Configure the button bindings & default commands
-
-    // m_driveTrainSub.setDefaultCommand(drive);
-    // m_conveySub.setDefaultCommand(conRun);
     CameraServer.startAutomaticCapture();
     configureButtonBindings();
     m_driveTrainSub.setDefaultCommand(new Drive(m_driveTrainSub));
 
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be
-   * created by instantiating a {@link GenericHID} or one of its subclasses
-   * ({@link edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then
-   * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
-    m_aButton.whenHeld(new ExtendClimbCommand(1, m_Climber));
-    m_bButton.whenHeld(new RetractClimbCommand(m_Climber));
+    // m_aButton.whenHeld(new AngleClimbCommandUp(m_climbersubsystem));
+    // m_bButton.whenHeld(new AngleCommandDown(m_climbersubsystem));
+    // m_yButton.whenHeld(new ExtendClimbCommand(m_climbersubsystem));
+    // m_xButton.whenHeld(new RetractClimbCommand(m_climbersubsystem));
+
     System.out.println("Configuring buttons");
 
   }
-
-  // Left Bumper - Climb
-  // new JoystickButton(xboxController, Button.kBumperLeft.value)
-  // .whenPressed(new Climb(m_ClimbSub));
 
   public static XboxController getXboxController() {
     return xboxController;
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
-  // public Command getAutonomousCommand() {
-  // // An ExampleCommand will run in autonomous
-  // return m_autoCommand;
-  // }
 }

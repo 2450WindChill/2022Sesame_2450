@@ -1,14 +1,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.Robot;
-
+import frc.robot.RobotContainer;
+import frc.robot.subsystems.DriveTrainSubsystem;
 
 public class AutonomousCommand extends SequentialCommandGroup {
+  public final DriveTrainSubsystem m_driveTrainSub = RobotContainer.m_driveTrainSub;
 
-  public AutonomousCommand(Robot m_robot) {
+  public AutonomousCommand(RobotContainer robotContainer) {
+
     addCommands(
-      new DriveBackward(m_robot)
-    );
+        new DriveBackward(m_driveTrainSub));
   }
 }

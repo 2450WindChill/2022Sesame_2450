@@ -12,7 +12,7 @@ import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExtendClimbCommand;
 import frc.robot.commands.RetractClimbCommand;
-import frc.robot.subsystems.ClimberSubSystem;
+import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
 /**
@@ -24,7 +24,8 @@ import frc.robot.subsystems.DriveTrainSubsystem;
  */
 public class RobotContainer {
   // Subsystems
-  public final ClimberSubSystem m_Climber = new ClimberSubSystem();
+  public final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
+  public final static DriveTrainSubsystem m_driveTrainSub = new DriveTrainSubsystem();
   // public final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   // Controllers
@@ -39,10 +40,6 @@ public class RobotContainer {
 
   // Components
   public final Compressor phCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
-  public final static DriveTrainSubsystem m_driveTrainSub = new DriveTrainSubsystem();
-
-  public final static ClimberSubSystem m_climbersubsystem = new ClimberSubSystem();
-
   // Commands
   public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
 
@@ -60,8 +57,8 @@ public class RobotContainer {
     System.out.println("About to configure buttons");
     // m_aButton.whenHeld(new AngleClimbCommandUp(m_climbersubsystem));
     // m_bButton.whenHeld(new AngleCommandDown(m_climbersubsystem));
-    // m_yButton.whenHeld(new ExtendClimbCommand(m_climbersubsystem));
-    // m_xButton.whenHeld(new RetractClimbCommand(m_climbersubsystem));
+    m_yButton.whenHeld(new ExtendClimbCommand(m_climberSubsystem));
+    m_xButton.whenHeld(new RetractClimbCommand(m_climberSubsystem));
 
     System.out.println("Configuring buttons");
 

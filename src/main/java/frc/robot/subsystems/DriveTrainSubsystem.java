@@ -39,7 +39,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void takeXboxInputs(XboxController xbox) {
 
-    m_robotDrive.arcadeDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()) * 0.4, xbox.getLeftX() * 0.6);
+    // m_robotDrive.arcadeDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()) * 0.4, xbox.getLeftX() * 0.6);
     // m_robotDrive.arcadeDrive(-xbox.getLeftTriggerAxis(),
     // xbox.getRightTriggerAxis());
 

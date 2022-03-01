@@ -3,7 +3,6 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -26,7 +25,6 @@ public class RobotContainer {
   // Subsystems
   public final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   public final static DriveTrainSubsystem m_driveTrainSub = new DriveTrainSubsystem();
-  // public final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
   // Controllers
   public static XboxController xboxController = new XboxController(0);

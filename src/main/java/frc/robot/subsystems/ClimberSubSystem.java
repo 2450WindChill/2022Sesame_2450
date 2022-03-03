@@ -17,6 +17,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public ClimberSubsystem() {
 
     }
+    
 
     public void ManualExtendsInputs(XboxController xbox) {
         // Unfinished need 'if' statement to check if value is negative or positive to

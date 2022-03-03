@@ -22,6 +22,10 @@ public class RetractClimbCommand extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.ExtendClimbArm.set(-Constants.climbSpeed);
+    boolean limitSwitchValue = m_subsystem.limitSwitch1.get();
+    if (limitSwitchValue == true){
+      m_subsystem.encoder1.reset();
+    }
   }
 
   @Override

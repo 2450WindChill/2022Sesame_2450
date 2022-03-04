@@ -6,4 +6,5 @@ public final class Constants {
     public static double autoDriveSpeed = 0.4;
     public static long autoDriveTime = 1500;
     public static double climbSpeed = 0.4;
+    public static double extendDistance = 94528;
 }

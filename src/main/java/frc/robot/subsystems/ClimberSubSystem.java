@@ -12,7 +12,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public final CANSparkMax ExtendClimbArm = new CANSparkMax(5, MotorType.kBrushed);
     public final CANSparkMax RetractClimbArm = new CANSparkMax(6, MotorType.kBrushed);
     public final CANSparkMax AngleAdjustmentArm = new CANSparkMax(7, MotorType.kBrushed);
-    public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k4X);
+    public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
     public final DigitalInput limitSwitch1 = new DigitalInput(2);
     public ClimberSubsystem() {
 

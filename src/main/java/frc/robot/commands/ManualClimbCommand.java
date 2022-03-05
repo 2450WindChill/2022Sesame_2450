@@ -32,6 +32,14 @@ public class ManualClimbCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    boolean limitSwitchValue = m_subsystem.limitSwitch1.get();
+    if (limitSwitchValue == true){
+      System.out.println("Limit switch activated!");
+      m_subsystem.ExtendClimbArm.stopMotor();
+      m_subsystem.encoder1.reset();
+      return true;
+    } else {
+      return false;
+    }
   }
 }

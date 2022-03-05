@@ -1,14 +1,15 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class RetractClimbCommand extends CommandBase {
+public class AngleUpCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubsystem m_subsystem;
 
-  public RetractClimbCommand(ClimberSubsystem subsystem) {
+  public AngleUpCommand(ClimberSubsystem subsystem) {
     m_subsystem = subsystem;
 
     addRequirements(subsystem);
@@ -21,24 +22,16 @@ public class RetractClimbCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_subsystem.DynamicArm1.set(-Constants.climbSpeed);
+    m_subsystem.AngleAdjustmentArm.set(Constants.angleSpeed);
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.DynamicArm1.set(0);
+    m_subsystem.AngleAdjustmentArm.set(0);
   }
 
   @Override
   public boolean isFinished() {
-    boolean limitSwitchValue = m_subsystem.limitSwitch1.get();
-    if (limitSwitchValue == true){
-      System.out.println("Limit switch activated!");
-      m_subsystem.DynamicArm1.stopMotor();
-      m_subsystem.encoder1.reset();
-      return true;
-    } else {
       return false;
-    }
   }
 }

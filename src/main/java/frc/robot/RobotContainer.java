@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
+import frc.robot.commands.AngleDownCommand;
+import frc.robot.commands.AngleUpCommand;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -56,8 +58,8 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
-    // m_aButton.whenHeld(new AngleClimbCommandUp(m_climbersubsystem));
-    // m_bButton.whenHeld(new AngleCommandDown(m_climbersubsystem));
+    m_aButton.whenHeld(new AngleDownCommand(m_climberSubsystem));
+    m_bButton.whenHeld(new AngleUpCommand(m_climberSubsystem));
     m_yButton.whenHeld(new ExtendClimbCommand(m_climberSubsystem));
     m_xButton.whenHeld(new RetractClimbCommand(m_climberSubsystem));
 

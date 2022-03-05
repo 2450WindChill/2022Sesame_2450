@@ -14,15 +14,15 @@ public class ClimberSubsystem extends SubsystemBase {
     public final CANSparkMax AngleAdjustmentArm = new CANSparkMax(7, MotorType.kBrushed);
     public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
     public final DigitalInput limitSwitch1 = new DigitalInput(2);
+
     public ClimberSubsystem() {
 
     }
-    
 
     public void ManualExtendsInputs(XboxController xbox) {
-        // Unfinished need 'if' statement to check if value is negative or positive to
-        // use either ExtendClimbArm motor or RetractClimbArm motor
-        ExtendClimbArm.set(xbox.getRightX());
+        if (xbox.getLeftY() < .1){
+            ExtendClimbArm.set(0);
+        }
+        ExtendClimbArm.set(xbox.getRightY()/2);
     }
-
 }

@@ -3,6 +3,7 @@ package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
@@ -10,6 +11,7 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExtendClimbCommand;
+import frc.robot.commands.ManualClimbCommand;
 import frc.robot.commands.RetractClimbCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -37,17 +39,18 @@ public class RobotContainer {
   public final JoystickButton m_triggerRight = new JoystickButton(xboxController, 3);
 
   // Components
-  public final Compressor phCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  // public final Compressor phCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   // Commands
   public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
 
   public RobotContainer() {
 
-    phCompressor.enableDigital();
+    // phCompressor.enableDigital();
 
     CameraServer.startAutomaticCapture();
     configureButtonBindings();
     m_driveTrainSub.setDefaultCommand(new Drive(m_driveTrainSub));
+    m_climberSubsystem.setDefaultCommand(new ManualClimbCommand(m_climberSubsystem));
 
   }
 

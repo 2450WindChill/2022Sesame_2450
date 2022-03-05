@@ -5,11 +5,11 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ManualExtend extends CommandBase {
+public class ManualClimbCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubsystem m_subsystem;
 
-  public ManualExtend(ClimberSubsystem subsystem) {
+  public ManualClimbCommand(ClimberSubsystem subsystem) {
     m_subsystem = subsystem;
 
     addRequirements(subsystem);
@@ -23,7 +23,6 @@ public class ManualExtend extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.ManualExtendsInputs(RobotContainer.getXboxController());
-    m_subsystem.ExtendClimbArm.set(Constants.climbSpeed);
   }
 
   @Override

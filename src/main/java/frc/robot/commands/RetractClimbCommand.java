@@ -31,7 +31,7 @@ public class RetractClimbCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    boolean limitSwitchValue = m_subsystem.limitSwitch1.get();
+    boolean limitSwitchValue = m_subsystem.lernieUp.get();
     if (limitSwitchValue == true){
       System.out.println("Limit switch activated!");
       m_subsystem.DynamicArm1.stopMotor();

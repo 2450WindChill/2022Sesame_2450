@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -15,8 +16,17 @@ public class ClimberSubsystem extends SubsystemBase {
     public final CANSparkMax DynamicArm1 = new CANSparkMax(5, MotorType.kBrushed);
     public final CANSparkMax DynamicArm2 = new CANSparkMax(6, MotorType.kBrushed);
     public final CANSparkMax AngleAdjustmentArm = new CANSparkMax(7, MotorType.kBrushed);
+    public final MotorControllerGroup DynamicArms = new MotorControllerGroup(DynamicArm1, DynamicArm2);
     public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
-    public final DigitalInput limitSwitch1 = new DigitalInput(2);
+    // lernie = left ernie and rernie = right ernie
+    public final DigitalInput lernieUp = new DigitalInput(2);
+    public final DigitalInput lernieDown = new DigitalInput(3);
+    public final DigitalInput lernieRight = new DigitalInput(4);
+    public final DigitalInput lernieLeft = new DigitalInput(5);
+    public final DigitalInput rernieUp = new DigitalInput(6);
+    public final DigitalInput rernieDown = new DigitalInput(7);
+    public final DigitalInput rernieRight = new DigitalInput(8);
+    public final DigitalInput rernieLeft = new DigitalInput(9);
     State state = State.ANGLE_ADJUSTER;
     public boolean doWeNeedToStopRumble = false;
 
@@ -76,7 +86,8 @@ public class ClimberSubsystem extends SubsystemBase {
         }
 
         else if (state == State.VERTICAL_ADJUSTER) {
-            xbox.setRumble(RumbleType.kRightRumble, 1);
+            // error attempt 1:
+            //xbox.setRumble(RumbleType.kRightRumble, 1);
             DynamicArm1.set(xbox.getRightY() / 2);
             DynamicArm2.set(xbox.getRightY() / 2);
             // Shutting off the other motor

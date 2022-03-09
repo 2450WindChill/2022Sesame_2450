@@ -2,14 +2,12 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.AngleDownCommand;
 import frc.robot.commands.AngleUpCommand;
 import frc.robot.commands.AutonomousCommand;
+import frc.robot.commands.SetExtendArmCommand;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ExtendClimbCommand;
@@ -32,8 +30,8 @@ public class RobotContainer {
 
   // Controllers
   public static XboxController xboxController = new XboxController(0);
-  public final JoystickButton m_aButton = new JoystickButton(xboxController, Button.kA.value);
-  public final JoystickButton m_bButton = new JoystickButton(xboxController, Button.kB.value);
+  public final JoystickButton m_leftBumper = new JoystickButton(xboxController, Button.kLeftBumper.value);
+  public final JoystickButton m_rightBumper = new JoystickButton(xboxController, Button.kRightBumper.value);
   public final JoystickButton m_yButton = new JoystickButton(xboxController, Button.kY.value);
   public final JoystickButton m_xButton = new JoystickButton(xboxController, Button.kX.value);
 
@@ -58,8 +56,9 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
-    m_aButton.whenHeld(new AngleDownCommand(m_climberSubsystem));
-    m_bButton.whenHeld(new AngleUpCommand(m_climberSubsystem));
+    //
+    m_leftBumper.whenPressed(new SetExtendArmCommand(m_climberSubsystem));
+    m_rightBumper.whenHeld(new AngleUpCommand(m_climberSubsystem));
     m_yButton.whenHeld(new ExtendClimbCommand(m_climberSubsystem));
     m_xButton.whenHeld(new RetractClimbCommand(m_climberSubsystem));
 

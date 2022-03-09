@@ -16,17 +16,18 @@ public class ExtendClimbCommand extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(subsystem);
   }
-
+  public double goalDistance;
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-
+    goalDistance = m_subsystem.encoder1.getDistance() + Constants.extendDistance;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
       m_subsystem.DynamicArm1.set(Constants.climbSpeed);
+      
     }
 
   // Called once the command ends or is interrupted.
@@ -38,6 +39,10 @@ public class ExtendClimbCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (goalDistance < m_subsystem.encoder1.getDistance()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

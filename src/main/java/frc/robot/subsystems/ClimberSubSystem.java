@@ -81,15 +81,13 @@ public class ClimberSubsystem extends SubsystemBase {
         if (state == State.ANGLE_ADJUSTER) {
             AngleAdjustmentArm.set(xbox.getRightY() / 2);
             // Shutting off the other motors
-            DynamicArm1.set(0);
-            DynamicArm2.set(0);
+            DynamicArms.set(0);
         }
 
         else if (state == State.VERTICAL_ADJUSTER) {
             // error attempt 1:
             //xbox.setRumble(RumbleType.kRightRumble, 1);
-            DynamicArm1.set(xbox.getRightY() / 2);
-            DynamicArm2.set(xbox.getRightY() / 2);
+            DynamicArms.set(xbox.getRightY() / 2);
             // Shutting off the other motor
             AngleAdjustmentArm.set(0);
         }

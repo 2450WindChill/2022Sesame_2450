@@ -26,14 +26,14 @@ public class ExtendClimbCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      m_subsystem.DynamicArm1.set(Constants.climbSpeed);
+      m_subsystem.DynamicArms.set(Constants.climbSpeed);
       
     }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.DynamicArm1.set(0);
+    m_subsystem.DynamicArms.set(0);
   }
 
   // Returns true when the command should end.

@@ -21,12 +21,12 @@ public class RetractClimbCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_subsystem.DynamicArm1.set(-Constants.climbSpeed);
+    m_subsystem.DynamicArms.set(-Constants.climbSpeed);
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.DynamicArm1.set(0);
+    m_subsystem.DynamicArms.set(0);
   }
 
   @Override
@@ -34,7 +34,7 @@ public class RetractClimbCommand extends CommandBase {
     boolean limitSwitchValue = m_subsystem.lernieUp.get();
     if (limitSwitchValue == true){
       System.out.println("Limit switch activated!");
-      m_subsystem.DynamicArm1.stopMotor();
+      m_subsystem.DynamicArms.stopMotor();
       m_subsystem.encoder1.reset();
       return true;
     } else {

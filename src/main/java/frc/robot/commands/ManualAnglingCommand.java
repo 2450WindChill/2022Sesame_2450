@@ -26,7 +26,7 @@ public class ManualAnglingCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.DynamicArm1.set(0);
+    m_subsystem.DynamicArms.set(0);
   }
 
   @Override

@@ -31,7 +31,7 @@ public class SetExtendArmCommand extends CommandBase {
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        m_subsystem.DynamicArm1.set(Constants.climbSpeed);
+        m_subsystem.DynamicArms.set(Constants.climbSpeed);
         SmartDashboard.putNumber("Value of the encoder", m_subsystem.encoder1.getDistance());
         System.out.println("Excuting");
     }
@@ -39,8 +39,7 @@ public class SetExtendArmCommand extends CommandBase {
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.DynamicArm1.set(0);
-        m_subsystem.DynamicArm2.set(0);
+        m_subsystem.DynamicArms.set(0);
         System.out.println("Ending: no speed");
     }
 

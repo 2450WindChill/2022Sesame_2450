@@ -25,7 +25,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
 
   public DriveTrainSubsystem() {
-    double rate = 1;
+    double rate = 2;
     m_rightMotor.setOpenLoopRampRate(rate);
     m_rightMotor2.setOpenLoopRampRate(rate);
     m_leftMotor.setOpenLoopRampRate(rate);
@@ -43,7 +43,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     // m_robotDrive.arcadeDrive(-xbox.getLeftTriggerAxis(),
     // xbox.getRightTriggerAxis());
 
-    m_robotDrive.curvatureDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()) * 1, xbox.getLeftX() * 1,
+    m_robotDrive.curvatureDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()), xbox.getLeftX(),
         xbox.getAButton());
     // m_robotDrive.tankDrive(xbox.getLeftTriggerAxis(),
     // xbox.getRightTriggerAxis());

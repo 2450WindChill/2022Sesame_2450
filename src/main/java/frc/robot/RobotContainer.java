@@ -7,12 +7,11 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.AngleDownCommand;
 import frc.robot.commands.AngleUpCommand;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.SetExtendArmCommand;
+import frc.robot.commands.SetExtendArmsCommand;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ExtendClimbCommand;
 import frc.robot.commands.ManualClimbCommand;
-import frc.robot.commands.RetractClimbCommand;
+import frc.robot.commands.SetRetractArmsCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
@@ -57,11 +56,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
     //
-    m_leftBumper.whenPressed(new SetExtendArmCommand(m_climberSubsystem));
-    m_rightBumper.whenHeld(new AngleUpCommand(m_climberSubsystem));
-    m_yButton.whenHeld(new ExtendClimbCommand(m_climberSubsystem));
-    m_xButton.whenHeld(new RetractClimbCommand(m_climberSubsystem));
-
+    m_leftBumper.whenPressed(new AngleDownCommand(m_climberSubsystem));
+    m_rightBumper.whenPressed(new AngleUpCommand(m_climberSubsystem));
+    m_yButton.whenPressed(new SetExtendArmsCommand(m_climberSubsystem));
+    m_xButton.whenPressed(new SetRetractArmsCommand(m_climberSubsystem));
     System.out.println("Configuring buttons");
 
   }

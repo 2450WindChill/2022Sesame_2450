@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
+
+// Calls DriveBackward when the autonomous phase begins
 public class AutonomousCommand extends SequentialCommandGroup {
   public final DriveTrainSubsystem m_driveTrainSub = RobotContainer.m_driveTrainSub;
 

@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase {
-    public final CANSparkMax DynamicArm1 = new CANSparkMax(5, MotorType.kBrushed);
-    public final CANSparkMax DynamicArm2 = new CANSparkMax(6, MotorType.kBrushed);
+    public final CANSparkMax LeftVerticalMotor = new CANSparkMax(5, MotorType.kBrushed);
+    public final CANSparkMax RightVerticalMotor = new CANSparkMax(6, MotorType.kBrushed);
     public final CANSparkMax AngleAdjustmentArm = new CANSparkMax(7, MotorType.kBrushed);
-    public final MotorControllerGroup DynamicArms = new MotorControllerGroup(DynamicArm1, DynamicArm2);
+    public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
     public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
     // lernie = left ernie and rernie = right ernie
     public final DigitalInput lernieUp = new DigitalInput(2);
@@ -79,26 +79,24 @@ public class ClimberSubsystem extends SubsystemBase {
         }
 
         if (state == State.ANGLE_ADJUSTER) {
-            AngleAdjustmentArm.set(xbox.getRightY() / 2);
+            if (xbox.getRightY() < .1){
+                AngleAdjustmentArm.set(0);
+            } else {
+                AngleAdjustmentArm.set(xbox.getRightY() / 2);
+            }
             // Shutting off the other motors
-            DynamicArms.set(0);
+            VerticalMotors.set(0);
         }
 
         else if (state == State.VERTICAL_ADJUSTER) {
-            // error attempt 1:
             //xbox.setRumble(RumbleType.kRightRumble, 1);
-            DynamicArms.set(xbox.getRightY() / 2);
+            if (xbox.getRightY() < .1){
+                VerticalMotors.set(0);
+            } else {
+                VerticalMotors.set(xbox.getRightY() / 2);
+            }
             // Shutting off the other motor
             AngleAdjustmentArm.set(0);
         }
-
-
-        //TODO: Finish/incoperate this:
-        // if (xbox.getRightY() < .1){
-        // AngleAdjustmentArm.set(0);
-        // }
-        // else {
-        // }
-
     }
 }

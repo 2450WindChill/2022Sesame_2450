@@ -4,6 +4,7 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrainSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+// Puts xbox inputs into the curvature drive
 public class Drive extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   public final DriveTrainSubsystem m_driveTrainSub;

@@ -1,9 +1,10 @@
 package frc.robot.commands;
 
-import frc.robot.Constants;
+import frc.robot.Constants; 
 import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+// Currently angles the arm up while a button is held but will eventually: Angles the arm up a set distance based off of a constant
 public class AngleUpCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubsystem m_subsystem;

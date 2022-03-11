@@ -4,6 +4,7 @@ import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+// Currently angles the arm down while a button is held but will eventually: Angles the arm down a set distance based off of a contant
 public class AngleDownCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubsystem m_subsystem;

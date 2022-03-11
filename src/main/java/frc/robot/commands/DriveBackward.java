@@ -5,6 +5,7 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.Delay;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+// Drives the robot backward for 1.5 seconds
 public class DriveBackward extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final DriveTrainSubsystem m_drivetrain;

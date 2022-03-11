@@ -4,6 +4,7 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+// Angles the dynamic arms using the right stick
 public class ManualAnglingCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubsystem m_subsystem;
@@ -26,7 +27,7 @@ public class ManualAnglingCommand extends CommandBase {
 
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.DynamicArms.set(0);
+    m_subsystem.VerticalMotors.set(0);
   }
 
   @Override

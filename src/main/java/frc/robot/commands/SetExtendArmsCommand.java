@@ -39,14 +39,13 @@ public class SetExtendArmsCommand extends CommandBase {
         System.out.println("Ending: no speed");
     }
 
-    // Returns true when the command should end.
     @Override
     public boolean isFinished() {
         boolean limitSwitchValue = m_subsystem.lernieUp.get();
         System.out.println("Value of limit switch: " + limitSwitchValue + "." + "Value of the encoder: " + m_subsystem.encoder1.getDistance());
-        if ((limitSwitchValue == true) || (goalDistance < m_subsystem.encoder1.getDistance())) {
-            return true;
+        if ((limitSwitchValue == true) || (goalDistance >= m_subsystem.encoder1.getDistance())) {
+            return false;
         }
-        return false;
+        return true;
     }
 }

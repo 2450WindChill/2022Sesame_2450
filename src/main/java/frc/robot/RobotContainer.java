@@ -56,8 +56,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
     //
-    m_leftBumper.whenPressed(new AngleDownCommand(m_climberSubsystem));
-    m_rightBumper.whenPressed(new AngleUpCommand(m_climberSubsystem));
+    m_leftBumper.whenHeld(new AngleDownCommand(m_climberSubsystem));
+    m_rightBumper.whenHeld(new AngleUpCommand(m_climberSubsystem));
     m_yButton.whenPressed(new SetExtendArmsCommand(m_climberSubsystem));
     m_xButton.whenPressed(new SetRetractArmsCommand(m_climberSubsystem));
     System.out.println("Configuring buttons");

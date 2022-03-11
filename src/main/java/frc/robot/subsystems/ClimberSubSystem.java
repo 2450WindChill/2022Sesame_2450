@@ -19,8 +19,8 @@ public class ClimberSubsystem extends SubsystemBase {
     public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
     public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
     // lernie = left ernie and rernie = right ernie
-    public final DigitalInput lernieUp = new DigitalInput(2);
     public final DigitalInput lernieDown = new DigitalInput(3);
+    public final DigitalInput lernieUp = new DigitalInput(2);
     public final DigitalInput lernieRight = new DigitalInput(4);
     public final DigitalInput lernieLeft = new DigitalInput(5);
     public final DigitalInput rernieUp = new DigitalInput(6);
@@ -79,7 +79,7 @@ public class ClimberSubsystem extends SubsystemBase {
         }
 
         if (state == State.ANGLE_ADJUSTER) {
-            if (xbox.getRightY() < .1){
+            if (xbox.getRightY() < .1 && xbox.getRightY() > -0.1){
                 AngleAdjustmentArm.set(0);
             } else {
                 AngleAdjustmentArm.set(xbox.getRightY() / 2);
@@ -90,7 +90,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
         else if (state == State.VERTICAL_ADJUSTER) {
             //xbox.setRumble(RumbleType.kRightRumble, 1);
-            if (xbox.getRightY() < .1){
+            if (xbox.getRightY() < .1 && xbox.getRightY() > -0.1){
                 VerticalMotors.set(0);
             } else {
                 VerticalMotors.set(xbox.getRightY() / 2);

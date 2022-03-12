@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.commands.AngleDownCommand;
 import frc.robot.commands.AngleUpCommand;
+import frc.robot.commands.AutoClimb;
 import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.SetExtendArmsCommand;
 import frc.robot.commands.Drive;
@@ -31,6 +32,7 @@ public class RobotContainer {
   public static XboxController xboxController = new XboxController(0);
   public final JoystickButton m_leftBumper = new JoystickButton(xboxController, Button.kLeftBumper.value);
   public final JoystickButton m_rightBumper = new JoystickButton(xboxController, Button.kRightBumper.value);
+  public final JoystickButton m_bButton = new JoystickButton(xboxController, Button.kB.value);
   public final JoystickButton m_yButton = new JoystickButton(xboxController, Button.kY.value);
   public final JoystickButton m_xButton = new JoystickButton(xboxController, Button.kX.value);
 
@@ -58,6 +60,7 @@ public class RobotContainer {
     //
     m_leftBumper.whenHeld(new AngleDownCommand(m_climberSubsystem));
     m_rightBumper.whenHeld(new AngleUpCommand(m_climberSubsystem));
+    m_bButton.whenPressed(new AutoClimb(m_climberSubsystem));
     m_yButton.whenPressed(new SetExtendArmsCommand(m_climberSubsystem));
     m_xButton.whenPressed(new SetRetractArmsCommand(m_climberSubsystem));
     System.out.println("Configuring buttons");

@@ -29,6 +29,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public final DigitalInput rernieLeft = new DigitalInput(9);
     public State state = State.VERTICAL_ADJUSTER;
     public boolean doWeNeedToStopRumble = false;
+    
 
     // Enum that defines the differnt possible states
     public enum State {

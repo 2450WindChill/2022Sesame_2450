@@ -8,6 +8,7 @@ public final class Constants {
     public static double climbSpeed = 0.2;
     public static double angleSpeed = 0.4;
     public static double extendDistance = 90000;
+    public static double angleDistance = 90000;
     public static int pov_right = 90;
     public static int pov_left = 270;
     public static int pov_up = 0;

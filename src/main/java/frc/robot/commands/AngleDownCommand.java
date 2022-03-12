@@ -14,10 +14,11 @@ public class AngleDownCommand extends CommandBase {
 
     addRequirements(subsystem);
   }
+  public double goalDistance;
 
   @Override
   public void initialize() {
-
+    goalDistance = m_subsystem.encoder1.getDistance() - Constants.angleDistance;
   }
 
   @Override
@@ -32,6 +33,10 @@ public class AngleDownCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
+    if (goalDistance > m_subsystem.encoder1.getDistance()) {
+      return true;
+    } else {
       return false;
+    }
   }
 }

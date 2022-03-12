@@ -43,6 +43,7 @@ public class SetRetractArmsCommand extends CommandBase {
         System.out.println("Value of limit switch: " + limitSwitchValue + "." + "Value of the encoder: " + m_subsystem.encoder1.getDistance());
         // need another limit switch otherwise it gets screwed up
         //if (limitSwitchValue == true || (goalDistance > m_subsystem.encoder1.getDistance())) {
+
         if (goalDistance > m_subsystem.encoder1.getDistance()) {
             return true;
         }

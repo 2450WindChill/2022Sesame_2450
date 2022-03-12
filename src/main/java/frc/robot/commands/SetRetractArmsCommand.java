@@ -16,7 +16,7 @@ public class SetRetractArmsCommand extends CommandBase {
 
         addRequirements(subsystem);
     }
-
+ 
     @Override
     public void initialize() {
         goalDistance = m_subsystem.encoder1.getDistance() - Constants.extendDistance;

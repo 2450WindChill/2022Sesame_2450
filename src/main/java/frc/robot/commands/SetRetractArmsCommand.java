@@ -39,8 +39,8 @@ public class SetRetractArmsCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        boolean limitSwitchValue = m_subsystem.lernieDown.get();
-        System.out.println("Value of limit switch: " + limitSwitchValue + "." + "Value of the encoder: " + m_subsystem.encoder1.getDistance());
+        // boolean limitSwitchValue = m_subsystem.lernieDown.get();
+        // System.out.println("Value of limit switch: " + limitSwitchValue + "." + "Value of the encoder: " + m_subsystem.encoder1.getDistance());
         // need another limit switch otherwise it gets screwed up
         //if (limitSwitchValue == true || (goalDistance > m_subsystem.encoder1.getDistance())) {
 

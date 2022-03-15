@@ -23,12 +23,12 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_subsystem.AngleAdjustmentArm.set(Constants.angleSpeed);
+    m_subsystem.AngleAdjustmentMotor.set(Constants.angleSpeed);
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.AngleAdjustmentArm.set(0);
+    m_subsystem.AngleAdjustmentMotor.set(0);
   }
 
   @Override

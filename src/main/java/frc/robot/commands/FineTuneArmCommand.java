@@ -5,11 +5,11 @@ import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // Extends or retracts the dynamic arms depending on the right stick
-public class ManualClimbCommand extends CommandBase {
+public class FineTuneArmCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubsystem m_subsystem;
 
-  public ManualClimbCommand(ClimberSubsystem subsystem) {
+  public FineTuneArmCommand(ClimberSubsystem subsystem) {
     m_subsystem = subsystem;
 
     addRequirements(subsystem);
@@ -22,7 +22,7 @@ public class ManualClimbCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_subsystem.ManualExtendsInputs(RobotContainer.getXboxController());
+    m_subsystem.ManualInputs(RobotContainer.getXboxController());
   }
 
   @Override
@@ -32,14 +32,14 @@ public class ManualClimbCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    boolean limitSwitchValue = m_subsystem.lernieUp.get();
-    if (limitSwitchValue == true) {
-      System.out.println("Limit switch activated!");
-      m_subsystem.VerticalMotors.stopMotor();
-      //m_subsystem.encoder1.reset();
-      return true;
-    } else {
+    //boolean limitSwitchValue = m_subsystem.lernieUp.get();
+    //if (limitSwitchValue == true) {
+      // System.out.println("Limit switch activated!");
+      // m_subsystem.VerticalMotors.stopMotor();
+      // m_subsystem.encoder1.reset();
+      // return true;
+    // } else {
       return false;
-    }
+    //}
   }
 }

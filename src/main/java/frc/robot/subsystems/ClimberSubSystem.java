@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
@@ -15,18 +16,19 @@ import frc.robot.Constants;
 public class ClimberSubsystem extends SubsystemBase {
     public final CANSparkMax LeftVerticalMotor = new CANSparkMax(5, MotorType.kBrushed);
     public final CANSparkMax RightVerticalMotor = new CANSparkMax(6, MotorType.kBrushed);
-    public final CANSparkMax AngleAdjustmentArm = new CANSparkMax(7, MotorType.kBrushed);
+    public final CANSparkMax AngleAdjustmentMotor = new CANSparkMax(7, MotorType.kBrushed);
     public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
     public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
+    public AnalogPotentiometer pot = new AnalogPotentiometer(0);
     // lernie = left ernie and rernie = right ernie
-    public final DigitalInput lernieDown = new DigitalInput(3);
-    public final DigitalInput lernieUp = new DigitalInput(2);
-    public final DigitalInput lernieRight = new DigitalInput(4);
-    public final DigitalInput lernieLeft = new DigitalInput(5);
-    public final DigitalInput rernieUp = new DigitalInput(6);
-    public final DigitalInput rernieDown = new DigitalInput(7);
-    public final DigitalInput rernieRight = new DigitalInput(8);
-    public final DigitalInput rernieLeft = new DigitalInput(9);
+    // public final DigitalInput lernieDown = new DigitalInput(3);
+    // public final DigitalInput lernieUp = new DigitalInput(2);
+    // public final DigitalInput lernieRight = new DigitalInput(4);
+    // public final DigitalInput lernieLeft = new DigitalInput(5);
+    // public final DigitalInput rernieUp = new DigitalInput(6);
+    // public final DigitalInput rernieDown = new DigitalInput(7);
+    //public final DigitalInput rernieRight = new DigitalInput(8);
+    // public final DigitalInput rernieLeft = new DigitalInput(9);
     public State state = State.VERTICAL_ADJUSTER;
     public boolean doWeNeedToStopRumble = false;
     
@@ -41,7 +43,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
     }
 
-    public void ManualExtendsInputs(XboxController xbox) {
+    public void ManualInputs(XboxController xbox) {
         // If the controller is still rumbleing, then stop the rumbleing
         if (doWeNeedToStopRumble == true) {
             doWeNeedToStopRumble = false;
@@ -56,7 +58,7 @@ public class ClimberSubsystem extends SubsystemBase {
         // The POV of the xbox is the d-pads buttons which each correlate to degrees 90, 180, 270, 360
         // If the pov of the xbox is a certain degree (button), then set the state to its corrsponding state
         
-        // If right or left, then the state is angle adjuster
+        // If right or left button on d-pad are pressed and the state is vertical adjuster, then set the state to angle adjuster
         if ((xbox.getPOV() == Constants.pov_right) || (xbox.getPOV() == Constants.pov_left)) {
             state = State.ANGLE_ADJUSTER;
             SmartDashboard.putString("Current State", "ANGLE_ADJUSTER");
@@ -66,7 +68,7 @@ public class ClimberSubsystem extends SubsystemBase {
             // Turn rumble off
             doWeNeedToStopRumble = true;
 
-        // Otherwise if up or down, then the state is vertical adjuster
+        // Otherwise if up or down button on d-pad are pressedand the state is angle adjuster, then set the state to vertical adjuster
         } else if ((xbox.getPOV() == Constants.pov_up) || (xbox.getPOV() == Constants.pov_down)) {
             state = State.VERTICAL_ADJUSTER;
             SmartDashboard.putString("Current State", "VERTICAL_ADJUSTER");
@@ -81,9 +83,10 @@ public class ClimberSubsystem extends SubsystemBase {
 
         if (state == State.ANGLE_ADJUSTER) {
             if (xbox.getRightY() < .1 && xbox.getRightY() > -0.1){
-                AngleAdjustmentArm.set(0);
+                // Joystick drift protection
+                AngleAdjustmentMotor.set(0);
             } else {
-                AngleAdjustmentArm.set(xbox.getRightY() / 2);
+                AngleAdjustmentMotor.set(xbox.getRightY() / 2);
             }
             // Shutting off the other motors
             VerticalMotors.set(0);
@@ -92,12 +95,13 @@ public class ClimberSubsystem extends SubsystemBase {
         else if (state == State.VERTICAL_ADJUSTER) {
             //xbox.setRumble(RumbleType.kRightRumble, 1);
             if (xbox.getRightY() < .1 && xbox.getRightY() > -0.1){
+                // Joystick drift protection
                 VerticalMotors.set(0);
             } else {
                 VerticalMotors.set(xbox.getRightY() / 2);
             }
             // Shutting off the other motor
-            AngleAdjustmentArm.set(0);
+            AngleAdjustmentMotor.set(0);
         }
     }
 }

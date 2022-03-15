@@ -41,8 +41,8 @@ public class SetExtendArmsCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        boolean limitSwitchValue = m_subsystem.lernieUp.get();
-        System.out.println("Value of limit switch: " + limitSwitchValue + "." + "Value of the encoder: " + m_subsystem.encoder1.getDistance());
+        // boolean limitSwitchValue = m_subsystem.lernieUp.get();
+        // System.out.println("Value of limit switch: " + limitSwitchValue + "." + "Value of the encoder: " + m_subsystem.encoder1.getDistance());
         if (goalDistance < m_subsystem.encoder1.getDistance()) {
             return true;
         }

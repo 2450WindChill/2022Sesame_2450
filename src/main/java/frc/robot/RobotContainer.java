@@ -11,8 +11,9 @@ import frc.robot.commands.AutonomousCommand;
 import frc.robot.commands.SetExtendArmsCommand;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ManualClimbCommand;
+import frc.robot.commands.FineTuneArmCommand;
 import frc.robot.commands.SetRetractArmsCommand;
+import frc.robot.commands.StringPotentiometerTest;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
@@ -51,7 +52,7 @@ public class RobotContainer {
     CameraServer.startAutomaticCapture();
     configureButtonBindings();
     m_driveTrainSub.setDefaultCommand(new Drive(m_driveTrainSub));
-    m_climberSubsystem.setDefaultCommand(new ManualClimbCommand(m_climberSubsystem));
+    m_climberSubsystem.setDefaultCommand(new FineTuneArmCommand(m_climberSubsystem));
 
   }
 
@@ -60,7 +61,7 @@ public class RobotContainer {
     //
     m_leftBumper.whenHeld(new AngleDownCommand(m_climberSubsystem));
     m_rightBumper.whenHeld(new AngleUpCommand(m_climberSubsystem));
-    m_bButton.whenPressed(new AutoClimb(m_climberSubsystem));
+    m_bButton.whenHeld(new StringPotentiometerTest(m_climberSubsystem));
     m_yButton.whenPressed(new SetExtendArmsCommand(m_climberSubsystem));
     m_xButton.whenPressed(new SetRetractArmsCommand(m_climberSubsystem));
     System.out.println("Configuring buttons");

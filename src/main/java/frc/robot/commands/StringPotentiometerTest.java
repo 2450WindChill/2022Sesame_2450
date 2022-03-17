@@ -1,9 +1,6 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.ClimberSubsystem;
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // Switches the state of the arms form whatever it is to the other state
@@ -25,7 +22,7 @@ public class StringPotentiometerTest extends CommandBase {
 
   @Override
   public void execute(){
-    System.out.println("Value of string potentiometer: " + m_subsystem.pot.get() * 1000000);
+    System.out.println("Value of string potentiometer: " + m_subsystem.verticalPot.get() * 1000000);
   }
 
   @Override

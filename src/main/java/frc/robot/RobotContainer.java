@@ -40,8 +40,6 @@ public class RobotContainer {
   public final JoystickButton m_triggerLeft = new JoystickButton(xboxController, 2);
   public final JoystickButton m_triggerRight = new JoystickButton(xboxController, 3);
 
-  // Components
-  // public final Compressor phCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
   // Commands
   public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
 

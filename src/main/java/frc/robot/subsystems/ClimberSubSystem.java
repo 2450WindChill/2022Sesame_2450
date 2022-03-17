@@ -11,17 +11,22 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.math.controller.PIDController;
 
 public class ClimberSubsystem extends SubsystemBase {
     public final CANSparkMax LeftVerticalMotor = new CANSparkMax(5, MotorType.kBrushed);
     public final CANSparkMax RightVerticalMotor = new CANSparkMax(6, MotorType.kBrushed);
     public final CANSparkMax AngleAdjustmentMotor = new CANSparkMax(7, MotorType.kBrushed);
-    // Vertical encoder
     public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
-    public final Encoder vertical_encoder = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
-    // Angle encoder
+
+    public final Encoder verticalEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
     public final Encoder angleEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k1X);
-    public AnalogPotentiometer pot = new AnalogPotentiometer(0);
+
+    public AnalogPotentiometer verticalPot = new AnalogPotentiometer(0);
+    public AnalogPotentiometer anglePot = new AnalogPotentiometer(1);
+    
+    PIDController pid = new PIDController(0, 0, 0);
+
     // lernie = left ernie and rernie = right ernie
     // public final DigitalInput lernieDown = new DigitalInput(3);
     // public final DigitalInput lernieUp = new DigitalInput(2);
@@ -33,8 +38,9 @@ public class ClimberSubsystem extends SubsystemBase {
     // public final DigitalInput rernieLeft = new DigitalInput(9);
     public State state = State.VERTICAL_ADJUSTER;
     public boolean doWeNeedToStopRumble = false;
+    public double maxExtensionPot = 734;
     
-
+ 
     // Enum that defines the differnt possible states
     public enum State {
         ANGLE_ADJUSTER,
@@ -52,13 +58,20 @@ public class ClimberSubsystem extends SubsystemBase {
             xbox.setRumble(RumbleType.kLeftRumble, 0);
         }
 
+
+
+    /*
+    D-PAD
+    */
+
+
         //System.out.println("The value of the POV is " + xbox.getPOV() + " degrees");
 
         // INFO ABOUT POV AND D-PAD:
         // The up and down buttons on the d-pad are the vertical adjusters
         // The left and right button on the d-pad are the angle adjusters
         // The POV of the xbox is the d-pads buttons which each correlate to degrees 90, 180, 270, 360
-        // If the pov of the xbox is a certain degree (button), then set the state to its corrsponding state
+        // If the pov of the xbox is a certain degree (button), then set the state to its corrsponding states
         
         // If right or left button on d-pad are pressed and the state is vertical adjuster, then set the state to angle adjuster
         if ((xbox.getPOV() == Constants.pov_right) || (xbox.getPOV() == Constants.pov_left)) {
@@ -105,5 +118,48 @@ public class ClimberSubsystem extends SubsystemBase {
             // Shutting off the other motor
             AngleAdjustmentMotor.set(0);
         }
+    }
+    
+
+
+
+    
+    /*
+    ARM LIMITS
+    */
+
+    public void VerticalStringPotExtentionLimit(AnalogPotentiometer verticalPot){
+        // This is max for vertical
+        if (verticalPot.get() * 1000000 < 800) { // Probably not 800
+            // Insert PID for VerticalMotors
+            VerticalMotors.set(pid.calculate(verticalPot.get() * 1000000, maxExtensionPot));
+        } 
+    }
+
+    public void VerticalStringPotRetractionLimit(AnalogPotentiometer verticalPot){
+        // This is minimum for vertical
+        if (verticalPot.get() * 1000000 > 900) { // Probably not 900
+            // Insert PID for VerticalMotors
+            VerticalMotors.set(pid.calculate(verticalPot.get() * 1000000, maxExtensionPot));
+        } 
+    }
+
+
+
+    // Angular Limits
+    public void AngleStringPotForwardLimit(AnalogPotentiometer anglePot){
+        // This is for max angle
+        if (anglePot.get() * 1000000 < 800) { // Probably not 800
+            // Insert PID for AngleAdjustmentMotors
+            VerticalMotors.set(pid.calculate(anglePot.get() * 1000000, maxExtensionPot));
+        }
+    } 
+
+    public void AngleStringPotBackwardLimit(AnalogPotentiometer anglePot){
+        // This is for backward angle
+        if (anglePot.get() * 1000000 > 900) {
+            // Insert PID for AngleAdjustmentMotors
+            VerticalMotors.set(pid.calculate(anglePot.get() * 1000000, maxExtensionPot));
+        } 
     }
 }

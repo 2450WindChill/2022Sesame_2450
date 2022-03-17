@@ -20,9 +20,7 @@ public class Drive extends CommandBase {
 
   @Override
   public void execute() {
-
     m_driveTrainSub.takeXboxInputs(RobotContainer.getXboxController());
-
   }
 
   @Override

@@ -26,11 +26,14 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public DriveTrainSubsystem() {
     double rate = 2;
+
+    // Inital acceleration of the robot (adjuste)
     m_rightMotor.setOpenLoopRampRate(rate);
     m_rightMotor2.setOpenLoopRampRate(rate);
     m_leftMotor.setOpenLoopRampRate(rate);
     m_leftMotor2.setOpenLoopRampRate(rate);
 
+    // Inverting the motors (as needed)
     m_rightMotor.setInverted(false);
     m_rightMotor2.setInverted(false);
     m_leftMotor.setInverted(false);

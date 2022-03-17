@@ -15,12 +15,13 @@ public class AngleUpCommand extends CommandBase {
     addRequirements(subsystem);
   }
   public double goalDistance;
+  private double stringPotLimit;
 
   @Override
   public void initialize() {
     goalDistance = m_subsystem.angleEncoder.getDistance() + Constants.angleDistance;
-    System.out.println("Angle Up: Initializing goal distance to: " + goalDistance);
-    System.out.println("Angle Up: Initializing encoder distance to: " + m_subsystem.angleEncoder.getDistance());
+    // System.out.println("Angle Up: Initializing goal distance to: " + goalDistance);
+    // System.out.println("Angle Up: Initializing encoder distance to: " + m_subsystem.angleEncoder.getDistance());
   }
 
   @Override
@@ -35,13 +36,13 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    System.out.println("Angle Up: Encoder value: " + m_subsystem.angleEncoder.getDistance());
-    System.out.println("Angle Up: Goal distance value: " + goalDistance);
-    if (goalDistance < m_subsystem.angleEncoder.getDistance()) {
-      System.err.println("Returning true");
+    // System.out.println("Angle Up: Encoder value: " + m_subsystem.angleEncoder.getDistance());
+    // System.out.println("Angle Up: Goal distance value: " + goalDistance);
+    if ((goalDistance < m_subsystem.angleEncoder.getDistance()) || (m_subsystem.pot.get() * 1000000 == 700)) {
+      // System.err.println("Returning true");
       return true;
     } else {
-      System.err.println("Returning false");
+      // System.err.println("Returning false");
       return false;
     }
   }

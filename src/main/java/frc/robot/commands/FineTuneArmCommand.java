@@ -13,6 +13,7 @@ public class FineTuneArmCommand extends CommandBase {
     m_subsystem = subsystem;
 
     addRequirements(subsystem);
+
   }
   
   @Override
@@ -32,14 +33,6 @@ public class FineTuneArmCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    //boolean limitSwitchValue = m_subsystem.lernieUp.get();
-    //if (limitSwitchValue == true) {
-      // System.out.println("Limit switch activated!");
-      // m_subsystem.VerticalMotors.stopMotor();
-      // m_subsystem.encoder1.reset();
-      // return true;
-    // } else {
       return false;
-    //}
   }
 }

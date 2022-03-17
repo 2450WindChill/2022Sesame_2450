@@ -19,8 +19,8 @@ public class AngleDownCommand extends CommandBase {
   @Override
   public void initialize() {
     goalDistance = m_subsystem.angleEncoder.getDistance() - Constants.angleDistance;
-    System.out.println("Angle Down: Initializing goal distance to: " + goalDistance);
-    System.out.println("Angle Down: Initializing encoder distance to: " + m_subsystem.angleEncoder.getDistance());
+    // System.out.println("Angle Down: Initializing goal distance to: " + goalDistance);
+    // System.out.println("Angle Down: Initializing encoder distance to: " + m_subsystem.angleEncoder.getDistance());
   }
 
   @Override
@@ -35,8 +35,8 @@ public class AngleDownCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    System.out.println("Angle Down: Encoder value: " + m_subsystem.angleEncoder.getDistance());
-    System.out.println("Angle Down: Goal distance value: " + goalDistance);
+    // System.out.println("Angle Down: Encoder value: " + m_subsystem.angleEncoder.getDistance());
+    // System.out.println("Angle Down: Goal distance value: " + goalDistance);
     if (goalDistance > m_subsystem.angleEncoder.getDistance()) {
       System.err.println("Returning True");
       return true;

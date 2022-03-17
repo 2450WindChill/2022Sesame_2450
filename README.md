@@ -35,3 +35,8 @@ DESCRIPTION OF SUBSYSTEMS:
 ClimberSubSystem: Holds motors, encoders, and limit switches associated with climbing. Also holds logic statements to change the state.
 
 DriveTrainSubsystem: Holds motors associated with driving. Also has curvature drive and things that slow initial acceleration.
+
+
+MOTOR ID'S:
+Vertical motors: 5 and 6
+Angle adjuster: 7

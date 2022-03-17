@@ -18,9 +18,11 @@ public class SwitchStateCommand extends CommandBase {
   @Override
   public void initialize() {
     if (m_subsystem.state == State.VERTICAL_ADJUSTER) {
-        m_subsystem.state = State.ANGLE_ADJUSTER;
+      m_subsystem.state = State.ANGLE_ADJUSTER;
+      System.out.println("State: angle adjuster");
     } else {
         m_subsystem.state = State.VERTICAL_ADJUSTER;
+        System.out.println("State: vertical adjuster");
     }
   }
 
@@ -36,6 +38,6 @@ public class SwitchStateCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-      return false;
+      return true;
   }
 }

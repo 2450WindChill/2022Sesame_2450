@@ -38,15 +38,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void takeXboxInputs(XboxController xbox) {
-
-    // m_robotDrive.arcadeDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()) * 0.4, xbox.getLeftX() * 0.6);
-    // m_robotDrive.arcadeDrive(-xbox.getLeftTriggerAxis(),
-    // xbox.getRightTriggerAxis());
-
-    m_robotDrive.curvatureDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()), xbox.getLeftX(),
-        xbox.getAButton());
-    // m_robotDrive.tankDrive(xbox.getLeftTriggerAxis(),
-    // xbox.getRightTriggerAxis());
-
+    m_robotDrive.curvatureDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()), xbox.getLeftX(), xbox.getAButton());
+    //m_robotDrive.curvatureDrive(0, 0, xbox.getAButton());
   }
 }

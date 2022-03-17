@@ -18,7 +18,9 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    goalDistance = m_subsystem.encoder1.getDistance() + Constants.angleDistance;
+    goalDistance = m_subsystem.angleEncoder.getDistance() + Constants.angleDistance;
+    System.out.println("Angle Up: Initializing goal distance to: " + goalDistance);
+    System.out.println("Angle Up: Initializing encoder distance to: " + m_subsystem.angleEncoder.getDistance());
   }
 
   @Override
@@ -33,9 +35,13 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (goalDistance < m_subsystem.encoder1.getDistance()) {
+    System.out.println("Angle Up: Encoder value: " + m_subsystem.angleEncoder.getDistance());
+    System.out.println("Angle Up: Goal distance value: " + goalDistance);
+    if (goalDistance < m_subsystem.angleEncoder.getDistance()) {
+      System.err.println("Returning true");
       return true;
     } else {
+      System.err.println("Returning false");
       return false;
     }
   }

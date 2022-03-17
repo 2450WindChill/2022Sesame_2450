@@ -19,7 +19,7 @@ public class SetExtendArmsCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        goalDistance = m_subsystem.encoder1.getDistance() + Constants.extendDistance;
+        goalDistance = m_subsystem.vertical_encoder.getDistance() + Constants.extendDistance;
         System.out.println("Value of goal distance" + goalDistance);
         System.out.println("Initializeing");
     }
@@ -28,7 +28,7 @@ public class SetExtendArmsCommand extends CommandBase {
     @Override
     public void execute() {
         m_subsystem.VerticalMotors.set(Constants.climbSpeed);
-        SmartDashboard.putNumber("Value of the encoder", m_subsystem.encoder1.getDistance());
+        SmartDashboard.putNumber("Value of the encoder", m_subsystem.vertical_encoder.getDistance());
         System.out.println("Excuting");
     }
 
@@ -43,7 +43,7 @@ public class SetExtendArmsCommand extends CommandBase {
     public boolean isFinished() {
         // boolean limitSwitchValue = m_subsystem.lernieUp.get();
         // System.out.println("Value of limit switch: " + limitSwitchValue + "." + "Value of the encoder: " + m_subsystem.encoder1.getDistance());
-        if (goalDistance < m_subsystem.encoder1.getDistance()) {
+        if (goalDistance < m_subsystem.vertical_encoder.getDistance()) {
             return true;
         }
         return false;

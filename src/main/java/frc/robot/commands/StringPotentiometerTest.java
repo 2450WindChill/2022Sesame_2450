@@ -35,9 +35,9 @@ public class StringPotentiometerTest extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    // if (m_subsystem.pot.get() > something) {
-      // m_subsystem.VerticalMotors.set(0);
-    // }
+    //  if (m_subsystem.pot.get() > something) {
+    //    m_subsystem.VerticalMotors.set(0);
+    //  }
       return false;
   }
 }

@@ -4,7 +4,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
@@ -17,8 +16,11 @@ public class ClimberSubsystem extends SubsystemBase {
     public final CANSparkMax LeftVerticalMotor = new CANSparkMax(5, MotorType.kBrushed);
     public final CANSparkMax RightVerticalMotor = new CANSparkMax(6, MotorType.kBrushed);
     public final CANSparkMax AngleAdjustmentMotor = new CANSparkMax(7, MotorType.kBrushed);
+    // Vertical encoder
     public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
-    public final Encoder encoder1 = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
+    public final Encoder vertical_encoder = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
+    // Angle encoder
+    public final Encoder angleEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k1X);
     public AnalogPotentiometer pot = new AnalogPotentiometer(0);
     // lernie = left ernie and rernie = right ernie
     // public final DigitalInput lernieDown = new DigitalInput(3);

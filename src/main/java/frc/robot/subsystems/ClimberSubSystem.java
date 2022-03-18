@@ -25,20 +25,10 @@ public class ClimberSubsystem extends SubsystemBase {
     public AnalogPotentiometer verticalPot = new AnalogPotentiometer(0);
     public AnalogPotentiometer anglePot = new AnalogPotentiometer(1);
     
-    PIDController pid = new PIDController(0, 0, 0);
+    PIDController pid = new PIDController(0.1, 0, 0);
 
-    // lernie = left ernie and rernie = right ernie
-    // public final DigitalInput lernieDown = new DigitalInput(3);
-    // public final DigitalInput lernieUp = new DigitalInput(2);
-    // public final DigitalInput lernieRight = new DigitalInput(4);
-    // public final DigitalInput lernieLeft = new DigitalInput(5);
-    // public final DigitalInput rernieUp = new DigitalInput(6);
-    // public final DigitalInput rernieDown = new DigitalInput(7);
-    //public final DigitalInput rernieRight = new DigitalInput(8);
-    // public final DigitalInput rernieLeft = new DigitalInput(9);
     public State state = State.VERTICAL_ADJUSTER;
     public boolean doWeNeedToStopRumble = false;
-    public double maxExtensionPot = 734;
     
  
     // Enum that defines the differnt possible states
@@ -63,9 +53,6 @@ public class ClimberSubsystem extends SubsystemBase {
     /*
     D-PAD
     */
-
-
-        //System.out.println("The value of the POV is " + xbox.getPOV() + " degrees");
 
         // INFO ABOUT POV AND D-PAD:
         // The up and down buttons on the d-pad are the vertical adjusters
@@ -128,38 +115,38 @@ public class ClimberSubsystem extends SubsystemBase {
     ARM LIMITS
     */
 
-    public void VerticalStringPotExtentionLimit(AnalogPotentiometer verticalPot){
+    public void VerticalStringPotExtentionLimit(double maxExtensionPot) {
         // This is max for vertical
-        if (verticalPot.get() * 1000000 < 800) { // Probably not 800
+        if (verticalPot.get() * Constants.potMultiplier < 800) { // Probably not 800
             // Insert PID for VerticalMotors
-            VerticalMotors.set(pid.calculate(verticalPot.get() * 1000000, maxExtensionPot));
+            VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), maxExtensionPot));
         } 
     }
 
-    public void VerticalStringPotRetractionLimit(AnalogPotentiometer verticalPot){
+    public void VerticalStringPotRetractionLimit(double maxRetractionPot) {
         // This is minimum for vertical
-        if (verticalPot.get() * 1000000 > 900) { // Probably not 900
+        if (verticalPot.get() * Constants.potMultiplier > 900) { // Probably not 900
             // Insert PID for VerticalMotors
-            VerticalMotors.set(pid.calculate(verticalPot.get() * 1000000, maxExtensionPot));
+            VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), maxRetractionPot));
         } 
     }
 
 
 
     // Angular Limits
-    public void AngleStringPotForwardLimit(AnalogPotentiometer anglePot){
+    public void AngleStringPotBackwardLimit(double maxRetractionPot) {
         // This is for max angle
-        if (anglePot.get() * 1000000 < 800) { // Probably not 800
+        if (anglePot.get() * Constants.potMultiplier < 800) { // Probably not 800
             // Insert PID for AngleAdjustmentMotors
-            VerticalMotors.set(pid.calculate(anglePot.get() * 1000000, maxExtensionPot));
+            AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), maxRetractionPot));
         }
     } 
 
-    public void AngleStringPotBackwardLimit(AnalogPotentiometer anglePot){
+    public void AngleStringPotForwardLimit(double maxExtensionPot) {
         // This is for backward angle
-        if (anglePot.get() * 1000000 > 900) {
+        if (anglePot.get() * Constants.potMultiplier > 900) {
             // Insert PID for AngleAdjustmentMotors
-            VerticalMotors.set(pid.calculate(anglePot.get() * 1000000, maxExtensionPot));
+            AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), maxExtensionPot));
         } 
     }
 }

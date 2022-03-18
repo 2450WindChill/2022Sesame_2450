@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -25,13 +26,14 @@ public class FineTuneArmCommand extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.ManualInputs(RobotContainer.getXboxController());
-    SmartDashboard.putNumber("String Potentiometer", m_subsystem.verticalPot.get());
-    SmartDashboard.putNumber("String Potentiometer", m_subsystem.anglePot.get());
+    // Calling one string pot function to check for forward angleing
+    //SmartDashboard.putNumber("String Vertical Potentiometer", m_subsystem.verticalPot.get());
+    SmartDashboard.putNumber("String Angle Potentiometer", m_subsystem.anglePot.get() * Constants.potMultiplier);
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.VerticalMotors.set(0);
+    
   }
 
   @Override

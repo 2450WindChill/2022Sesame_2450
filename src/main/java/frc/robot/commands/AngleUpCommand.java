@@ -19,12 +19,13 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public void initialize() {
-     SmartDashboard.putNumber("String Potentiometer", m_subsystem.anglePot.get());
+
   }
 
   @Override
   public void execute() {
-    m_subsystem.AngleAdjustmentMotor.set(Constants.angleSpeed);
+    m_subsystem.AngleStringPotBackwardLimit(100000);
+    System.out.println("Value of encoder: " + m_subsystem.angleEncoder.getDistance());
   }
 
   @Override
@@ -34,7 +35,7 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (goalDistance < m_subsystem.angleEncoder.getDistance()) {
+    if (m_subsystem.angleEncoder.getDistance() >= 100000) {
       return true;
     } else {
       return false;

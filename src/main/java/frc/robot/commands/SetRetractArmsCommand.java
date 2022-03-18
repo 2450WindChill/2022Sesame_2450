@@ -19,12 +19,12 @@ public class SetRetractArmsCommand extends CommandBase {
  
     @Override
     public void initialize() {
-        goalDistance = m_subsystem.verticalEncoder.getDistance() - Constants.extendDistance;
+       
     }
 
     @Override
     public void execute() {
-        m_subsystem.VerticalMotors.set(-Constants.climbSpeed);
+        m_subsystem.VerticalStringPotRetractionLimit(-100000);
     }
 
     @Override

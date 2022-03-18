@@ -7,6 +7,7 @@ public final class Constants {
     public static double angleSpeed = 0.4;
     public static double extendDistance = 9000;
     public static double angleDistance = 9000;
+    public static double potMultiplier = 1000000;
 
     public static int pov_right = 90;
     public static int pov_left = 270;

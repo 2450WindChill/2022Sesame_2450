@@ -22,7 +22,7 @@ public class StringPotentiometerTest extends CommandBase {
 
   @Override
   public void execute(){
-    System.out.println("Value of string potentiometer: " + m_subsystem.verticalPot.get() * 1000000);
+    //System.out.println("Value of string potentiometer: " + m_subsystem.verticalPot.get() * Constants.potMultiplier);
   }
 
   @Override

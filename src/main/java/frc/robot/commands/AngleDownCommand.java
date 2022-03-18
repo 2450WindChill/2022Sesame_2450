@@ -18,12 +18,12 @@ public class AngleDownCommand extends CommandBase {
 
   @Override
   public void initialize() {
-    goalDistance = m_subsystem.angleEncoder.getDistance() - Constants.angleDistance;
-  }
+
+  } 
 
   @Override
   public void execute() {
-    m_subsystem.AngleAdjustmentMotor.set(-Constants.angleSpeed);
+    m_subsystem.AngleStringPotForwardLimit(-100000);
   }
 
   @Override
@@ -33,7 +33,8 @@ public class AngleDownCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (goalDistance > m_subsystem.angleEncoder.getDistance()) {
+    if (m_subsystem.angleEncoder.getDistance() <= -100000) {
+      System.out.println("Max distance of angle forwarding reached");
       return true;
     } else {
       return false;

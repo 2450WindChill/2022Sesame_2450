@@ -18,14 +18,12 @@ public class SetExtendArmsCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        goalDistance = m_subsystem.verticalEncoder.getDistance() + Constants.extendDistance;
-        System.out.println("Value of goal distance" + goalDistance);
-        System.out.println("Initializeing");
+
     }
 
     @Override
     public void execute() {
-        m_subsystem.VerticalMotors.set(Constants.climbSpeed);
+        m_subsystem.VerticalStringPotExtentionLimit(100000);
     }
 
     @Override

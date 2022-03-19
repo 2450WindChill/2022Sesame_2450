@@ -32,7 +32,7 @@ public class SetExtendArmsCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (m_subsystem.verticalEncoder.getDistance() >= Constants.PIDExtendTolerance) {
+        if ((m_subsystem.verticalEncoder.getDistance() >= Constants.PIDExtendTolerance) || (m_subsystem.maxExtendSwitch.get() == true)) {
             return true;
         } else {
         return false;

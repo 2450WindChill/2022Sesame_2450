@@ -33,7 +33,7 @@ public class AngleDownCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (m_subsystem.angleEncoder.getDistance() <= Constants.PIDRetractTolerance) {
+    if ((m_subsystem.angleEncoder.getDistance() <= Constants.PIDRetractTolerance) || (m_subsystem.maxAngleDownSwitch.get() == true)) {
       return true;
     } else {
       return false;

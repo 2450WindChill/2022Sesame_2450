@@ -10,7 +10,7 @@ public final class Constants {
 
     // PID
     public static double PIDExtendTolerance = 95000;
-    public static double PIDRetractTolerance = 0;
+    public static double PIDRetractTolerance = 5000;
 
     // States
     public static int pov_right = 90;

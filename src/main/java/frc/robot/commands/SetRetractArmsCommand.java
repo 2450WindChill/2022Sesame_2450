@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // Retracts the dynamic arms a set distance based off of a constant or stops if a limit switch is triggered
@@ -34,7 +33,7 @@ public class SetRetractArmsCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-    if (m_subsystem.verticalEncoder.getDistance() <= Constants.PIDRetractTolerance) {
+    if ((m_subsystem.verticalEncoder.getDistance() <= Constants.PIDRetractTolerance) || (m_subsystem.maxRetractSwitch.get() == true)) {
         return true;
     }
         return false;

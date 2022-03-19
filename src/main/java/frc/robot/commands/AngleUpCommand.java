@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // Angles the arm down a set distance based off of a contant
@@ -34,7 +33,7 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (m_subsystem.angleEncoder.getDistance() >= Constants.PIDExtendTolerance) {
+    if ((m_subsystem.angleEncoder.getDistance() >= Constants.PIDExtendTolerance) || (m_subsystem.maxAngleUpSwitch.get() == true)) {
       return true;
     } else {
       return false;

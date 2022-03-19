@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class SetRetractArmsCommand extends CommandBase {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private final ClimberSubsystem m_subsystem;
-    public double goalDistance;
 
     public SetRetractArmsCommand(ClimberSubsystem subsystem) {
         m_subsystem = subsystem;
@@ -24,7 +23,7 @@ public class SetRetractArmsCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_subsystem.VerticalStringPotRetractionLimit(-100000);
+        m_subsystem.VerticalRetractionPID();
     }
 
     @Override
@@ -35,7 +34,7 @@ public class SetRetractArmsCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-    if (goalDistance > m_subsystem.verticalEncoder.getDistance()) {
+    if (m_subsystem.verticalEncoder.getDistance() <= Constants.PIDRetractTolerance) {
         return true;
     }
         return false;

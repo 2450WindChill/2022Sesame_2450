@@ -24,8 +24,7 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_subsystem.AngleStringPotBackwardLimit(100000);
-    System.out.println("Value of encoder: " + m_subsystem.angleEncoder.getDistance());
+    m_subsystem.AngleBackPID();
   }
 
   @Override
@@ -35,7 +34,7 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (m_subsystem.angleEncoder.getDistance() >= 100000) {
+    if (m_subsystem.angleEncoder.getDistance() >= Constants.PIDExtendTolerance) {
       return true;
     } else {
       return false;

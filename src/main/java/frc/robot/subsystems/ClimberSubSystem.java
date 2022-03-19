@@ -34,9 +34,10 @@ public class ClimberSubsystem extends SubsystemBase {
     public final DigitalInput maxAngleUpSwitch = new DigitalInput(4);
     public final DigitalInput maxAngleDownSwitch = new DigitalInput(5);
 
-    PIDController pid = new PIDController(0.5, 0, 0);
+    PIDController pid = new PIDController(0.000005, 0, 0);
 
     public State state = State.VERTICAL_ADJUSTER;
+
     public boolean doWeNeedToStopRumble = false;
 
     // Enum that defines the differnt possible states
@@ -46,7 +47,7 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public ClimberSubsystem() {
-
+        
     }
 
     public void ManualInputs(XboxController xbox) {
@@ -140,36 +141,20 @@ public class ClimberSubsystem extends SubsystemBase {
      * ARM LIMITS
      */
 
-    public void VerticalStringPotExtentionLimit(double maxExtensionPot) {
-        // This is max for vertical
-        if (verticalPot.get() * Constants.potMultiplier < 800) { // Probably not 800
-            // Insert PID for VerticalMotors
-            VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), maxExtensionPot));
-        }
+    public void VerticalExtentionPID() {
+        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), 0));
     }
 
-    public void VerticalStringPotRetractionLimit(double maxRetractionPot) {
-        // This is minimum for vertical
-        if (verticalPot.get() * Constants.potMultiplier > 900) { // Probably not 900
-            // Insert PID for VerticalMotors
-            VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), maxRetractionPot));
-        }
+    public void VerticalRetractionPID() {
+        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), 100000));
     }
 
-    // Angular Limits
-    public void AngleStringPotBackwardLimit(double maxRetractionPot) {
-        // This is for max angle
-        if (anglePot.get() * Constants.potMultiplier < 800) { // Probably not 800
-            // Insert PID for AngleAdjustmentMotors
-            AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), maxRetractionPot));
-        }
+    // Angular PID
+    public void AngleBackPID() {
+        AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), 100000));
     }
 
-    public void AngleStringPotForwardLimit(double maxExtensionPot) {
-        // This is for backward angle
-        if (anglePot.get() * Constants.potMultiplier > 900) {
-            // Insert PID for AngleAdjustmentMotors
-            AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), maxExtensionPot));
-        }
+    public void AngleForwardPID() {
+        AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), 0));
     }
 }

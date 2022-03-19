@@ -23,7 +23,7 @@ public class AngleDownCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_subsystem.AngleStringPotForwardLimit(-100000);
+    m_subsystem.AngleForwardPID();
   }
 
   @Override
@@ -33,8 +33,7 @@ public class AngleDownCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if (m_subsystem.angleEncoder.getDistance() <= -100000) {
-      System.out.println("Max distance of angle forwarding reached");
+    if (m_subsystem.angleEncoder.getDistance() <= Constants.PIDRetractTolerance) {
       return true;
     } else {
       return false;

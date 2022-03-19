@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class SetExtendArmsCommand extends CommandBase {
     @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
     private final ClimberSubsystem m_subsystem;
-    public double goalDistance;
 
     public SetExtendArmsCommand(ClimberSubsystem subsystem) {
         m_subsystem = subsystem;
@@ -23,7 +22,7 @@ public class SetExtendArmsCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_subsystem.VerticalStringPotExtentionLimit(100000);
+        m_subsystem.VerticalExtentionPID();
     }
 
     @Override
@@ -33,7 +32,7 @@ public class SetExtendArmsCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (goalDistance < m_subsystem.verticalEncoder.getDistance()) {
+        if (m_subsystem.verticalEncoder.getDistance() >= Constants.PIDExtendTolerance) {
             return true;
         } else {
         return false;

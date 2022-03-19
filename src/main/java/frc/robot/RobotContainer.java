@@ -13,7 +13,6 @@ import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.FineTuneArmCommand;
 import frc.robot.commands.SetRetractArmsCommand;
-import frc.robot.commands.StringPotentiometerTest;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 

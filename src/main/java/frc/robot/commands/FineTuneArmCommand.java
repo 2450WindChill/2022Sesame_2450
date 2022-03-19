@@ -20,15 +20,19 @@ public class FineTuneArmCommand extends CommandBase {
   
   @Override
   public void initialize() {
+    SmartDashboard.putString("Current State", "VERTICAL_ADJUSTER");
 
   }
 
   @Override
   public void execute() {
     m_subsystem.ManualInputs(RobotContainer.getXboxController());
-    // Calling one string pot function to check for forward angleing
-    //SmartDashboard.putNumber("String Vertical Potentiometer", m_subsystem.verticalPot.get());
-    SmartDashboard.putNumber("String Angle Potentiometer", m_subsystem.anglePot.get() * Constants.potMultiplier);
+    if (m_subsystem.maxAngleDownSwitch.get() == true){
+      m_subsystem.angleEncoder.reset();
+    }
+    if (m_subsystem.maxRetractSwitch.get() == true){
+      m_subsystem.verticalEncoder.reset();
+    }
   }
 
   @Override

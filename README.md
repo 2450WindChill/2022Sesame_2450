@@ -37,6 +37,9 @@ ClimberSubSystem: Holds motors, encoders, and limit switches associated with cli
 DriveTrainSubsystem: Holds motors associated with driving. Also has curvature drive and things that slow initial acceleration.
 
 
-MOTOR ID'S:
+Componet ID'S:
 Vertical motors: 5 and 6
 Angle adjuster: 7
+Retract limit switch: 7
+Angle up limit switch: 4
+Angle down limit switch: 5

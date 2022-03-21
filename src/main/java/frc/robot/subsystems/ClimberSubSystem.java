@@ -1,17 +1,15 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants;
 import edu.wpi.first.math.controller.PIDController;
 
 public class ClimberSubsystem extends SubsystemBase {
@@ -26,7 +24,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public AnalogPotentiometer verticalPot = new AnalogPotentiometer(0);
     public AnalogPotentiometer anglePot = new AnalogPotentiometer(1);
 
-    public final DigitalInput maxExtendSwitch = new DigitalInput(6);
+
     public final DigitalInput maxRetractSwitch = new DigitalInput(7);
     public final DigitalInput maxAngleUpSwitch = new DigitalInput(4);
     public final DigitalInput maxAngleDownSwitch = new DigitalInput(5);
@@ -44,93 +42,46 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public ClimberSubsystem() {
-        
+        LeftVerticalMotor.setIdleMode(IdleMode.kBrake);
+        RightVerticalMotor.setIdleMode(IdleMode.kBrake);
+        // AngleAdjustmentMotor.setIdleMode(IdleMode.kBrake);
     }
 
     public void ManualInputs(XboxController xbox) {
-        // If the controller is still rumbleing, then stop the rumbleing
-        if (doWeNeedToStopRumble == true) {
-            doWeNeedToStopRumble = false;
-            xbox.setRumble(RumbleType.kLeftRumble, 0);
-        }
-
-        /*
-         * D-PAD
-         */
-
-        // INFO ABOUT POV AND D-PAD:
-        // The up and down buttons on the d-pad are the vertical adjusters
-        // The left and right button on the d-pad are the angle adjusters
-        // The POV of the xbox is the d-pads buttons which each correlate to degrees 90,
-        // 180, 270, 360
-        // If the pov of the xbox is a certain degree (button), then set the state to
-        // its corrsponding states
-
-        // If right or left button on d-pad are pressed and the state is vertical
-        // adjuster, then set the state to angle adjuster
-        if ((xbox.getPOV() == Constants.pov_right) || (xbox.getPOV() == Constants.pov_left)) {
-            state = State.ANGLE_ADJUSTER;
-            SmartDashboard.putString("Current State", "ANGLE_ADJUSTER");
-            // Vibrate the controller when you switch into this state
-            xbox.setRumble(RumbleType.kLeftRumble, 1);
-
-            // Turn rumble off
-            doWeNeedToStopRumble = true;
-
-            // Otherwise if up or down button on d-pad are pressedand the state is angle
-            // adjuster, then set the state to vertical adjuster
-        } else if ((xbox.getPOV() == Constants.pov_up) || (xbox.getPOV() == Constants.pov_down)) {
-            state = State.VERTICAL_ADJUSTER;
-            SmartDashboard.putString("Current State", "VERTICAL_ADJUSTER");
-            // Vibrate the controller when you switch into this state
-            xbox.setRumble(RumbleType.kLeftRumble, 1);
-            doWeNeedToStopRumble = true;
-
-            // If not up, down, left, or right, then use the previously set state
-        } else {
-
-        }
-
-        if (state == State.ANGLE_ADJUSTER) {
-            // Joystick drift protection
-            if (xbox.getRightY() < .1 && xbox.getRightY() > -0.1) {
-                AngleAdjustmentMotor.set(0);
+        System.out.println("Value of the left joystick X " + xbox.getLeftX());
+        // Joystick drift protection
+        if ((xbox.getRightY() < .125) && (xbox.getRightY() > -0.125)) {
+            AngleAdjustmentMotor.set(0);
 
             // Protection for angling up to far
-            } else if (xbox.getRightY() > 0 && maxAngleUpSwitch.get() == true) {
-                AngleAdjustmentMotor.set(0);
+        } else if ((xbox.getRightY() > 0) && (maxAngleUpSwitch.get() == true)) {
+            AngleAdjustmentMotor.set(0);
 
             // Protection for angling down to far
-            } else if (xbox.getRightY() < 0 && maxAngleDownSwitch.get() == true) {
-                AngleAdjustmentMotor.set(0);
-            
+        } else if ((xbox.getRightY()) < 0 && (maxAngleDownSwitch.get() == true)) {
+            AngleAdjustmentMotor.set(0);
+
             // Otherwise move motors normally
-            } else {
-                AngleAdjustmentMotor.set(xbox.getRightY() / 2);
-            }
-            // Shutting off the other motors
-            VerticalMotors.set(0);
+        } else {
+            AngleAdjustmentMotor.set(xbox.getRightY() * 0.75);
         }
 
-        else if (state == State.VERTICAL_ADJUSTER) {
-            // Joystick drift protection
-            if (xbox.getRightY() < .1 && xbox.getRightY() > -0.1) {
-                VerticalMotors.set(0);
 
-                // Protection for extending to far
-            } else if (xbox.getRightY() > 0 && maxExtendSwitch.get() == true) {
-                VerticalMotors.set(0);
+        // Joystick drift protection
+        if ((xbox.getLeftY() < .125) && (xbox.getLeftY() > -0.125)) {
+            VerticalMotors.set(0);
 
-                // Protection for retracting to far
-            } else if (xbox.getRightY() < 0 && maxRetractSwitch.get() == true) {
-                VerticalMotors.set(0);
+        // Protection for retracting to far
+        // Reading negative when going up
+        } else if ((xbox.getLeftY() > 0) && (maxRetractSwitch.get() == true)) {
+            VerticalMotors.set(0);
+            System.out.println("Should be stopping: " + xbox.getLeftY());
 
-                // Otherwise move the motors normally
-            } else {
-                VerticalMotors.set(xbox.getRightY() / 2);
-            }
-            // Shutting off the other motor
-            AngleAdjustmentMotor.set(0);
+        // Otherwise move the motors normally
+        } else {
+            VerticalMotors.set(xbox.getLeftY() * 0.75);
+            System.out.println("Retract limit switch state: " + maxRetractSwitch.get());
+            System.out.println("Value of the left joystick: " + xbox.getLeftY());
         }
     }
 
@@ -138,20 +89,20 @@ public class ClimberSubsystem extends SubsystemBase {
      * ARM LIMITS
      */
 
-    public void VerticalExtentionPID() {
-        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), 0));
+    public void VerticalExtentionPID(double verticalExtensionGoal) {
+        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), verticalExtensionGoal));
     }
 
-    public void VerticalRetractionPID() {
-        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), 100000));
+    public void VerticalRetractionPID(double verticalRetractionGoal) {
+        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), verticalRetractionGoal));
     }
 
     // Angular PID
-    public void AngleBackPID() {
-        AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), 100000));
+    public void AngleBackPID(double angleBackGoal) {
+        AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), angleBackGoal));
     }
 
-    public void AngleForwardPID() {
-        AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), 0));
+    public void AngleForwardPID(double angleForwardGoal) {
+        AngleAdjustmentMotor.set(pid.calculate(angleEncoder.getDistance(), angleForwardGoal));
     }
 }

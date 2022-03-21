@@ -23,9 +23,8 @@ public class AngleUpCommand extends CommandBase {
 
   @Override
   public void execute() {
-    m_subsystem.AngleBackPID();
+    m_subsystem.AngleBackPID(100000);
   }
-
   @Override
   public void end(boolean interrupted) {
     m_subsystem.AngleAdjustmentMotor.set(0);

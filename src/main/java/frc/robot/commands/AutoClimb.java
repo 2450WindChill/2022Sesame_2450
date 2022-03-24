@@ -9,15 +9,9 @@
 //     addCommands(
 //       new SetRetractArmsCommand(m_climb),
 
-//       new SwitchStateCommand(m_climb),
-
 //       new AngleDownCommand(m_climb),
-      
-//       new SwitchStateCommand(m_climb),
 
 //       new SetExtendArmsCommand(m_climb),
-
-//       new SwitchStateCommand(m_climb),
 
 //       new AngleUpCommand(m_climb),
   

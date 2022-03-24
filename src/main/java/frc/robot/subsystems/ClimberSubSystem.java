@@ -18,7 +18,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public final CANSparkMax AngleAdjustmentMotor = new CANSparkMax(7, MotorType.kBrushed);
     public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
 
-    public final Encoder verticalEncoder = new Encoder(0, 1, false, Encoder.EncodingType.k1X);
+    public final Encoder verticalEncoder = new Encoder(8, 9, false, Encoder.EncodingType.k1X);
     public final Encoder angleEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k1X);
 
     public AnalogPotentiometer verticalPot = new AnalogPotentiometer(0);
@@ -29,7 +29,7 @@ public class ClimberSubsystem extends SubsystemBase {
     public final DigitalInput maxAngleUpSwitch = new DigitalInput(4);
     public final DigitalInput maxAngleDownSwitch = new DigitalInput(5);
 
-    PIDController pid = new PIDController(0.000005, 0, 0);
+    PIDController pid = new PIDController(0.00000125, 0, 0);
 
     public State state = State.VERTICAL_ADJUSTER;
 
@@ -48,9 +48,9 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public void ManualInputs(XboxController xbox) {
-        System.out.println("Value of the left joystick X " + xbox.getLeftX());
+        //System.out.println("Value of the left joystick X " + xbox.getLeftX());
         // Joystick drift protection
-        if ((xbox.getRightY() < .125) && (xbox.getRightY() > -0.125)) {
+        if ((xbox.getRightY() < .15) && (xbox.getRightY() > -0.15)) {
             AngleAdjustmentMotor.set(0);
 
             // Protection for angling up to far
@@ -68,7 +68,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
 
         // Joystick drift protection
-        if ((xbox.getLeftY() < .125) && (xbox.getLeftY() > -0.125)) {
+        if ((xbox.getLeftY() < .15) && (xbox.getLeftY() > -0.15)) {
             VerticalMotors.set(0);
 
         // Protection for retracting to far
@@ -81,7 +81,7 @@ public class ClimberSubsystem extends SubsystemBase {
         } else {
             VerticalMotors.set(xbox.getLeftY() * 0.75);
             System.out.println("Retract limit switch state: " + maxRetractSwitch.get());
-            System.out.println("Value of the left joystick: " + xbox.getLeftY());
+            //System.out.println("Value of the left joystick: " + xbox.getLeftY());
         }
     }
 

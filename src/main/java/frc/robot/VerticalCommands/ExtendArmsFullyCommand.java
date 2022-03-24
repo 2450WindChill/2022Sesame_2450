@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.VerticalCommands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -17,7 +17,7 @@ public class ExtendArmsFullyCommand extends CommandBase {
 
     @Override
     public void initialize() {
-
+        System.out.println("Fully extending arms");
     }
 
     @Override

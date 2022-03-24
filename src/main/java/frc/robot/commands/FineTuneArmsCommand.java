@@ -6,11 +6,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // Extends or retracts the dynamic arms depending on the right stick
-public class FineTuneArmCommand extends CommandBase {
+public class FineTuneArmsCommand extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final ClimberSubsystem m_subsystem;
 
-  public FineTuneArmCommand(ClimberSubsystem subsystem) {
+  public FineTuneArmsCommand(ClimberSubsystem subsystem) {
     m_subsystem = subsystem;
 
     addRequirements(subsystem);

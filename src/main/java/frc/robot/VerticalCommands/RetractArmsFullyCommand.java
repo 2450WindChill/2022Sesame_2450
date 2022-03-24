@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.VerticalCommands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
@@ -17,25 +17,27 @@ public class RetractArmsFullyCommand extends CommandBase {
  
     @Override
     public void initialize() {
-       
+       System.out.println("Fully retracting arms");
     }
-
+ 
     @Override
     public void execute() {
+        //System.out.println("Executing retract fully arms command");
         m_subsystem.VerticalRetractionPID(0);
     }
 
     @Override
     public void end(boolean interrupted) {
         m_subsystem.VerticalMotors.set(0);
-        System.out.println("Ending: no speed");
     }
 
     @Override
     public boolean isFinished() {
     if ((m_subsystem.verticalEncoder.getDistance() <= Constants.PIDRetractTolerance) || (m_subsystem.maxRetractSwitch.get() == true)) {
+        System.out.println("Is finished: true");
         return true;
     }
+        System.out.println("Is finished: false");
         return false;
     }
 }

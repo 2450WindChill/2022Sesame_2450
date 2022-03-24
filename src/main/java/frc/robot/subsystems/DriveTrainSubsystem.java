@@ -25,7 +25,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   public final DifferentialDrive m_robotDrive = new DifferentialDrive(leftMotorGroup, rightMotorGroup);
 
   public DriveTrainSubsystem() {
-    double rate = 2;
+    double rate = 0.5;
 
     // Inital acceleration of the robot (adjuste)
     m_rightMotor.setOpenLoopRampRate(rate);
@@ -34,6 +34,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
     m_leftMotor2.setOpenLoopRampRate(rate);
 
     // Inverting the motors (as needed)
+  
     m_rightMotor.setInverted(false);
     m_rightMotor2.setInverted(false);
     m_leftMotor.setInverted(false);
@@ -41,7 +42,7 @@ public class DriveTrainSubsystem extends SubsystemBase {
   }
 
   public void takeXboxInputs(XboxController xbox) {
-    m_robotDrive.curvatureDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()), xbox.getLeftX(), xbox.getAButton());
+    m_robotDrive.curvatureDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()), xbox.getLeftX() * 0.5, xbox.getAButton());
     //m_robotDrive.curvatureDrive(0, 0, xbox.getAButton());
   }
 }

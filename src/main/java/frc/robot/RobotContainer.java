@@ -4,14 +4,14 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.commands.AngleDownCommand;
-import frc.robot.commands.AngleUpCommand;
+import frc.robot.AngleCommands.AngleDownFullyCommand;
+import frc.robot.AngleCommands.AngleUpFullyCommand;
+import frc.robot.VerticalCommands.ExtendArmsFullyCommand;
+import frc.robot.VerticalCommands.RetractArmsFullyCommand;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.ExtendArmsFullyCommand;
 import frc.robot.commands.Drive;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.FineTuneArmsCommand;
-import frc.robot.commands.RetractArmsFullyCommand;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
 
@@ -30,12 +30,11 @@ public class RobotContainer {
   // Controllers
   public static XboxController driveController = new XboxController(0);
   public static XboxController climbController = new XboxController(1);
-   
-  public final JoystickButton m_leftBumper = new JoystickButton(driveController, Button.kLeftBumper.value);
-  public final JoystickButton m_rightBumper = new JoystickButton(driveController, Button.kRightBumper.value);
-  public final JoystickButton m_bButton = new JoystickButton(driveController, Button.kB.value);
-  public final JoystickButton m_yButton = new JoystickButton(driveController, Button.kY.value);
-  public final JoystickButton m_xButton = new JoystickButton(driveController, Button.kX.value);
+
+  public final JoystickButton m_aButton = new JoystickButton(climbController, Button.kA.value);
+  public final JoystickButton m_bButton = new JoystickButton(climbController, Button.kB.value);
+  public final JoystickButton m_yButton = new JoystickButton(climbController, Button.kY.value);
+  public final JoystickButton m_xButton = new JoystickButton(climbController, Button.kX.value);
 
   public final JoystickButton m_triggerLeft = new JoystickButton(driveController, 2);
   public final JoystickButton m_triggerRight = new JoystickButton(driveController, 3);
@@ -57,9 +56,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
     //
-    m_leftBumper.whenPressed(new AngleDownCommand(m_climberSubsystem));
-    m_rightBumper.whenPressed(new AngleUpCommand(m_climberSubsystem));
-    //m_bButton.whenPressed(new AutoClimb(m_climberSubsystem));
+    m_aButton.whenPressed(new AngleDownFullyCommand(m_climberSubsystem));
+    m_bButton.whenPressed(new AngleUpFullyCommand(m_climberSubsystem));
     m_yButton.whenPressed(new ExtendArmsFullyCommand(m_climberSubsystem));
     m_xButton.whenPressed(new RetractArmsFullyCommand(m_climberSubsystem));
     System.out.println("Configuring buttons");

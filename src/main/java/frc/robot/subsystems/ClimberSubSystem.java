@@ -13,10 +13,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.controller.PIDController;
 
 public class ClimberSubsystem extends SubsystemBase {
-    public final CANSparkMax LeftVerticalMotor = new CANSparkMax(5, MotorType.kBrushed);
-    public final CANSparkMax RightVerticalMotor = new CANSparkMax(6, MotorType.kBrushed);
+    public final CANSparkMax VerticalMotor = new CANSparkMax(5, MotorType.kBrushed);
+    // public final CANSparkMax RightVerticalMotor = new CANSparkMax(6, MotorType.kBrushed);
     public final CANSparkMax AngleAdjustmentMotor = new CANSparkMax(7, MotorType.kBrushed);
-    public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
+    // public final MotorControllerGroup VerticalMotors = new MotorControllerGroup(LeftVerticalMotor, RightVerticalMotor);
 
     public final Encoder verticalEncoder = new Encoder(8, 9, false, Encoder.EncodingType.k1X);
     public final Encoder angleEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k1X);
@@ -42,46 +42,48 @@ public class ClimberSubsystem extends SubsystemBase {
     }
 
     public ClimberSubsystem() {
-        LeftVerticalMotor.setIdleMode(IdleMode.kBrake);
-        RightVerticalMotor.setIdleMode(IdleMode.kBrake);
+        //BRAKE MODE BREAKS MOTOR, DO NOT TURN ON
+
+        VerticalMotor.setIdleMode(IdleMode.kCoast);
+        // RightVerticalMotor.setIdleMode(IdleMode.kCoast);
         // AngleAdjustmentMotor.setIdleMode(IdleMode.kBrake);
     }
 
     public void ManualInputs(XboxController xbox) {
-        //System.out.println("Value of the left joystick X " + xbox.getLeftX());
+        System.out.println("Value of the left joystick  " + xbox.getLeftY());
+        System.out.println("Value of the right joystick " + xbox.getRightY());
         // Joystick drift protection
-        if ((xbox.getRightY() < .15) && (xbox.getRightY() > -0.15)) {
-            AngleAdjustmentMotor.set(0);
+        if ((xbox.getRightX() < .15) && (xbox.getRightX() > -0.15)) {
+           AngleAdjustmentMotor.set(0);
 
             // Protection for angling up to far
-        } else if ((xbox.getRightY() > 0) && (maxAngleUpSwitch.get() == true)) {
-            AngleAdjustmentMotor.set(0);
-
+        // } else if ((xbox.getRightY() > 0) && (maxAngleUpSwitch.get() == true)) {
+        //     AngleAdjustmentMotor.set(0);
+        }
             // Protection for angling down to far
-        } else if ((xbox.getRightY()) < 0 && (maxAngleDownSwitch.get() == true)) {
-            AngleAdjustmentMotor.set(0);
+        //else if ((xbox.getRightY()) < 0 && (maxAngleDownSwitch.get() == true)) {
+        //     AngleAdjustmentMotor.set(0);
 
             // Otherwise move motors normally
-        } else {
-            AngleAdjustmentMotor.set(xbox.getRightY() * 0.75);
+        else {
+            AngleAdjustmentMotor.set(-xbox.getRightX() * 0.75);
         }
 
 
         // Joystick drift protection
         if ((xbox.getLeftY() < .15) && (xbox.getLeftY() > -0.15)) {
-            VerticalMotors.set(0);
+            VerticalMotor.set(0);
 
         // Protection for retracting to far
         // Reading negative when going up
         } else if ((xbox.getLeftY() > 0) && (maxRetractSwitch.get() == true)) {
-            VerticalMotors.set(0);
+            VerticalMotor.set(0);
             System.out.println("Should be stopping: " + xbox.getLeftY());
 
         // Otherwise move the motors normally
         } else {
-            VerticalMotors.set(xbox.getLeftY() * 0.75);
-            System.out.println("Retract limit switch state: " + maxRetractSwitch.get());
-            //System.out.println("Value of the left joystick: " + xbox.getLeftY());
+            VerticalMotor.set(xbox.getLeftY() * 0.75);
+            //System.out.println("Value of the right joystick: " + xbox.getRightX());
         }
     }
 
@@ -90,11 +92,11 @@ public class ClimberSubsystem extends SubsystemBase {
      */
 
     public void VerticalExtentionPID(double verticalExtensionGoal) {
-        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), verticalExtensionGoal));
+        VerticalMotor.set(pid.calculate(verticalEncoder.getDistance(), verticalExtensionGoal));
     }
 
     public void VerticalRetractionPID(double verticalRetractionGoal) {
-        VerticalMotors.set(pid.calculate(verticalEncoder.getDistance(), verticalRetractionGoal));
+        VerticalMotor.set(pid.calculate(verticalEncoder.getDistance(), verticalRetractionGoal));
     }
 
     // Angular PID

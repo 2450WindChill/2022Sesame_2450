@@ -2,8 +2,10 @@ package frc.robot;
 
 public final class Constants {
     // Auto Phase
-    public static double autoDriveSpeed = 0.4;
-    public static long autoDriveTime = 1500;
+    public static double autoDriveSpeedBackward = -0.6;
+    public static double autoDriveSpeedForward = 0.4;
+    public static long autoDriveTimeBackward = 750;
+    public static long autoDriveTimeForward = 2000;
 
     // SetPointCommand
     public static double climbSpeed = 0.2;

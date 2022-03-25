@@ -7,11 +7,13 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 
 // Calls DriveBackward when the autonomous phase begins
 public class AutonomousCommand extends SequentialCommandGroup {
-  public final DriveTrainSubsystem m_driveTrainSub = RobotContainer.m_driveTrainSub;
-
-  public AutonomousCommand(RobotContainer robotContainer) {
+  public DriveTrainSubsystem m_driveTrainSub;
+  public AutonomousCommand(RobotContainer robotContainer, DriveTrainSubsystem subsystem) {
+    m_driveTrainSub = subsystem;
+    addRequirements(m_driveTrainSub);
 
     addCommands(
-        new DriveBackward(m_driveTrainSub));
+        new DriveBackward(m_driveTrainSub),
+        new DriveForward(m_driveTrainSub));
   }
 }

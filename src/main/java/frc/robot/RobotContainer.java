@@ -26,6 +26,7 @@ public class RobotContainer {
   // Subsystems
   public final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   public final static DriveTrainSubsystem m_driveTrainSub = new DriveTrainSubsystem();
+  
 
   // Controllers
   public static XboxController driveController = new XboxController(0);
@@ -40,7 +41,8 @@ public class RobotContainer {
   public final JoystickButton m_triggerRight = new JoystickButton(driveController, 3);
 
   // Commands
-  public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
+  public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this, m_driveTrainSub);
+  // public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
 
   public RobotContainer() {
 
@@ -55,11 +57,13 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
-    //
+
     m_aButton.whenPressed(new AngleDownFullyCommand(m_climberSubsystem));
     m_bButton.whenPressed(new AngleUpFullyCommand(m_climberSubsystem));
     m_yButton.whenPressed(new ExtendArmsFullyCommand(m_climberSubsystem));
     m_xButton.whenPressed(new RetractArmsFullyCommand(m_climberSubsystem));
+
+
     System.out.println("Configuring buttons");
 
   }

@@ -4,7 +4,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.XboxController;
@@ -21,8 +20,8 @@ public class ClimberSubsystem extends SubsystemBase {
     public final Encoder verticalEncoder = new Encoder(8, 9, false, Encoder.EncodingType.k1X);
     public final Encoder angleEncoder = new Encoder(2, 3, false, Encoder.EncodingType.k1X);
 
-    public AnalogPotentiometer verticalPot = new AnalogPotentiometer(0);
-    public AnalogPotentiometer anglePot = new AnalogPotentiometer(1);
+    // public AnalogPotentiometer verticalPot = new AnalogPotentiometer(0);
+    // public AnalogPotentiometer anglePot = new AnalogPotentiometer(1);
 
 
     public final DigitalInput maxRetractSwitch = new DigitalInput(7);
@@ -31,22 +30,12 @@ public class ClimberSubsystem extends SubsystemBase {
 
     PIDController pid = new PIDController(0.00000125, 0, 0);
 
-    public State state = State.VERTICAL_ADJUSTER;
-
-    public boolean doWeNeedToStopRumble = false;
-
-    // Enum that defines the differnt possible states
-    public enum State {
-        ANGLE_ADJUSTER,
-        VERTICAL_ADJUSTER,
-    }
-
     public ClimberSubsystem() {
         //BRAKE MODE BREAKS MOTOR, DO NOT TURN ON
 
-        VerticalMotor.setIdleMode(IdleMode.kCoast);
-        // RightVerticalMotor.setIdleMode(IdleMode.kCoast);
-        // AngleAdjustmentMotor.setIdleMode(IdleMode.kBrake);
+        VerticalMotor.setIdleMode(IdleMode.kBrake);
+        // RightVerticalMotor.setIdleMode(IdleMode.kBrake);
+        AngleAdjustmentMotor.setIdleMode(IdleMode.kBrake);
     }
 
     public void ManualInputs(XboxController xbox) {
@@ -66,7 +55,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
             // Otherwise move motors normally
         else {
-            AngleAdjustmentMotor.set(-xbox.getRightX() * 0.75);
+            AngleAdjustmentMotor.set(-xbox.getRightX());
         }
 
 
@@ -82,7 +71,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
         // Otherwise move the motors normally
         } else {
-            VerticalMotor.set(xbox.getLeftY() * 0.75);
+            VerticalMotor.set(xbox.getLeftY());
             //System.out.println("Value of the right joystick: " + xbox.getRightX());
         }
     }

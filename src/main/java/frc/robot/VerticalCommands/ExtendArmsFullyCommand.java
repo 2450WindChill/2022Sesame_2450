@@ -27,7 +27,8 @@ public class ExtendArmsFullyCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.VerticalMotor.set(0);
+        m_subsystem.setVerticalSpeed(0);
+        //m_subsystem.VerticalMotor.set(0);
     }
 
     @Override

@@ -27,7 +27,8 @@ public class AngleUpFullyCommand extends CommandBase {
   }
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.AngleAdjustmentMotor.set(0);
+    m_subsystem.setAngleSpeed(0);
+    //m_subsystem.AngleAdjustmentMotor.set(0);
   }
 
   @Override

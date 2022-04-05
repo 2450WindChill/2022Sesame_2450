@@ -27,13 +27,13 @@ public class AngleUpFullyCommand extends CommandBase {
   }
   @Override
   public void end(boolean interrupted) {
-    m_subsystem.setAngleSpeed(0);
-    //m_subsystem.AngleAdjustmentMotor.set(0);
+    //m_subsystem.setAngleSpeed(0);
+    m_subsystem.AngleAdjustmentMotor.set(0);
   }
 
   @Override
   public boolean isFinished() {
-    if ((m_subsystem.angleEncoder.getDistance() >= Constants.PIDExtendTolerance) || (m_subsystem.maxAngleUpSwitch.get() == true)) {
+    if ((m_subsystem.angleEncoder.getPosition() >= Constants.PIDExtendTolerance) || (m_subsystem.maxAngleUpSwitch.get() == true)) {
       return true;
     } else {
       return false;

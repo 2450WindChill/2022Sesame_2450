@@ -28,17 +28,17 @@ public class RetractArmsFullyCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.setVerticalSpeed(0);
-        //m_subsystem.VerticalMotor.set(0);
+        //m_subsystem.setVerticalSpeed(0);
+        m_subsystem.VerticalMotor.set(0);
     }
 
     @Override
     public boolean isFinished() {
-    if ((m_subsystem.verticalEncoder.getDistance() <= Constants.PIDRetractTolerance) || (m_subsystem.maxRetractSwitch.get() == true)) {
+    if ((m_subsystem.verticalEncoder.getPosition() <= Constants.PIDRetractTolerance) || (m_subsystem.maxRetractSwitch.get() == true)) {
         System.out.println("Is finished: true");
         return true;
     }
-        System.out.println("Is finished: false");
-        return false;
+    System.out.println("Is finished: false");
+    return false;
     }
 }

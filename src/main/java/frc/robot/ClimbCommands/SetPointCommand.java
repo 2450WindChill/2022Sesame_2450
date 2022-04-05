@@ -19,26 +19,26 @@ public class SetPointCommand extends CommandBase {
 
   @Override
   public void initialize() {
-      offset = 3;
+      offset = 300;
 
   }
 
   @Override
   // If the distance of the arms is greater than the setpoint, then set the speed of the motors to extend
   public void execute() {
-      if (m_subsystem.verticalEncoder.getDistance() > m_SetPoint + offset) {
-          m_subsystem.setVerticalSpeed(-Constants.climbSpeed);
-          //m_subsystem.VerticalMotor.set(-Constants.climbSpeed);
+      if (m_subsystem.verticalEncoder.getPosition() > m_SetPoint + offset) {
+          //m_subsystem.setVerticalSpeed(-Constants.climbSpeed);
+          m_subsystem.VerticalMotor.set(-Constants.climbSpeed);
       }
  // If the distance of the arms is less than the setpoint, then set the speed of the motors to retract
-      else if (m_subsystem.verticalEncoder.getDistance() < m_SetPoint - offset) {
-          m_subsystem.setVerticalSpeed(Constants.climbSpeed);
-          //m_subsystem.VerticalMotor.set(Constants.climbSpeed);
+      else if (m_subsystem.verticalEncoder.getPosition() < m_SetPoint - offset) {
+          //m_subsystem.setVerticalSpeed(Constants.climbSpeed);
+          m_subsystem.VerticalMotor.set(Constants.climbSpeed);
       }
 // If the arm distance is equal to the setpoint stop motors
       else {
-          m_subsystem.setVerticalSpeed(0);
-          //m_subsystem.VerticalMotor.set(0);
+          //m_subsystem.setVerticalSpeed(0);
+          m_subsystem.VerticalMotor.set(0);
       }
     
   }
@@ -52,9 +52,6 @@ public class SetPointCommand extends CommandBase {
   @Override
   
   public boolean isFinished() {
-    if (((m_SetPoint < m_subsystem.verticalEncoder.getDistance() - offset)) && (m_SetPoint > m_subsystem.verticalEncoder.getDistance() + offset)) {
-      return true;
-    }
       return false;
     }
   }

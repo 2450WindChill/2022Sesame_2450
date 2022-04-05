@@ -43,8 +43,6 @@ public class DriveTrainSubsystem extends SubsystemBase {
 
   public void takeXboxInputs(XboxController xbox) {
     m_robotDrive.curvatureDrive((-xbox.getLeftTriggerAxis() + xbox.getRightTriggerAxis()), xbox.getLeftX() * .75 //turn rate
-
-    
     , xbox.getAButton());
     //m_robotDrive.curvatureDrive(0, 0, xbox.getAButton());
   }

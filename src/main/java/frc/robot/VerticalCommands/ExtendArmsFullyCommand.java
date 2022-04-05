@@ -22,18 +22,18 @@ public class ExtendArmsFullyCommand extends CommandBase {
 
     @Override
     public void execute() {
-        m_subsystem.VerticalExtentionPID(-332000);
+        m_subsystem.VerticalExtentionPID(-100000);
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_subsystem.setVerticalSpeed(0);
-        //m_subsystem.VerticalMotor.set(0);
+        //m_subsystem.setVerticalSpeed(newSpeedVertical);
+        m_subsystem.VerticalMotor.set(0);
     }
 
     @Override
     public boolean isFinished() {
-        if ((m_subsystem.verticalEncoder.getDistance() >= Constants.PIDExtendTolerance)) {
+        if ((m_subsystem.verticalEncoder.getPosition() >= Constants.PIDExtendTolerance)) {
             return true;
         } else {
         return false;

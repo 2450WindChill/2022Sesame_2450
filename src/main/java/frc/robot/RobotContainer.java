@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
 import frc.robot.AngleCommands.AngleUpFullyCommand;
 import frc.robot.ClimbCommands.FineTuneArmsCommand;
+import frc.robot.ClimbCommands.SetPointCommand;
 import frc.robot.AngleCommands.AngleDownFullyCommand;
 import frc.robot.DriveCommands.Drive;
 import frc.robot.VerticalCommands.ExtendArmsFullyCommand;
@@ -36,6 +37,7 @@ public class RobotContainer {
   public final JoystickButton m_bButton = new JoystickButton(climbController, Button.kB.value);
   public final JoystickButton m_yButton = new JoystickButton(climbController, Button.kY.value);
   public final JoystickButton m_xButton = new JoystickButton(climbController, Button.kX.value);
+  public final JoystickButton m_rightBumper = new JoystickButton(climbController, Button.kRightBumper.value);
 
   public final JoystickButton m_triggerLeft = new JoystickButton(driveController, 2);
   public final JoystickButton m_triggerRight = new JoystickButton(driveController, 3);
@@ -58,10 +60,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
 
-    m_aButton.whenPressed(new AngleDownFullyCommand(m_climberSubsystem));
-    m_bButton.whenPressed(new AngleUpFullyCommand(m_climberSubsystem));
-    m_yButton.whenPressed(new ExtendArmsFullyCommand(m_climberSubsystem));
-    m_xButton.whenPressed(new RetractArmsFullyCommand(m_climberSubsystem));
+    // m_aButton.whenPressed(new AngleDownFullyCommand(m_climberSubsystem));
+    // m_bButton.whenPressed(new AngleUpFullyCommand(m_climberSubsystem));
+    // m_yButton.whenPressed(new ExtendArmsFullyCommand(m_climberSubsystem));
+    // m_xButton.whenPressed(new RetractArmsFullyCommand(m_climberSubsystem));
+    m_aButton.whileHeld(new SetPointCommand(m_climberSubsystem.verticalEncoder.getPosition(), m_climberSubsystem));
 
 
     System.out.println("Configuring buttons");

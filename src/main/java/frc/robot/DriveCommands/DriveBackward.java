@@ -28,20 +28,20 @@ public class DriveBackward extends CommandBase {
 
   @Override
   public void initialize() {
-    System.out.println("INITIALIZING ROBOT DRIVE BACKWARDS");
+    //System.out.println("INITIALIZING ROBOT DRIVE BACKWARDS");
     d = new Delay(time);
   }
 
   @Override
   public void execute() {
-    System.out.println("Executing robot drive backward");
+    //System.out.println("Executing robot drive backward");
     m_drivetrain.leftMotorGroup.set(Constants.autoDriveSpeedBackward);
     m_drivetrain.rightMotorGroup.set(Constants.autoDriveSpeedBackward);
   }
 
   @Override
   public void end(boolean interrupted) {
-    System.out.println("STOPPING ROBOT");
+    //System.out.println("STOPPING ROBOT");
     m_drivetrain.leftMotorGroup.set(0);
     m_drivetrain.rightMotorGroup.set(0);
   }

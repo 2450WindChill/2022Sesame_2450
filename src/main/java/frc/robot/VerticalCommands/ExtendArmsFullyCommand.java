@@ -17,7 +17,7 @@ public class ExtendArmsFullyCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        System.out.println("Fully extending arms");
+        //System.out.println("Fully extending arms");
     }
 
     @Override

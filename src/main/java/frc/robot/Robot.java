@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     if (m_robotContainer.m_autonomousCommand != null) {
       m_robotContainer.m_autonomousCommand.schedule();
-      System.out.println("Running autonomous");
+      //System.out.println("Running autonomous");
     }
   }
 }

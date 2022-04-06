@@ -17,7 +17,7 @@ public class RetractArmsFullyCommand extends CommandBase {
  
     @Override
     public void initialize() {
-       System.out.println("Fully retracting arms");
+       //System.out.println("Fully retracting arms");
     }
  
     @Override
@@ -35,10 +35,10 @@ public class RetractArmsFullyCommand extends CommandBase {
     @Override
     public boolean isFinished() {
     if ((m_subsystem.verticalEncoder.getPosition() <= Constants.PIDRetractTolerance) || (m_subsystem.maxRetractSwitch.get() == true)) {
-        System.out.println("Is finished: true");
+        //System.out.println("Is finished: true");
         return true;
     }
-    System.out.println("Is finished: false");
+    //System.out.println("Is finished: false");
     return false;
     }
 }

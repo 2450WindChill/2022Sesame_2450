@@ -20,21 +20,21 @@ public class DriveForward extends CommandBase {
 
   @Override
   public void initialize() {
-    System.out.println("INITIALIZING ROBOT DRIVE FORWARDS");
+    //System.out.println("INITIALIZING ROBOT DRIVE FORWARDS");
     d = new Delay(time);
     
   }
 
   @Override
   public void execute() {
-    System.out.println("Executing robot drive forward");
+    //System.out.println("Executing robot drive forward");
     m_drivetrain.leftMotorGroup.set(Constants.autoDriveSpeedForward);
     m_drivetrain.rightMotorGroup.set(Constants.autoDriveSpeedForward);
   }
 
   @Override
   public void end(boolean interrupted) {
-    System.out.println("STOPPING ROBOT");
+    //System.out.println("STOPPING ROBOT");
     m_drivetrain.leftMotorGroup.set(0);
     m_drivetrain.rightMotorGroup.set(0);
   }

@@ -8,7 +8,7 @@ public final class Constants {
     public static long autoDriveTimeForward = 2000;
 
     // SetPointCommand
-    public static double climbSpeed = 0.2;
+    public static double correctionSpeed = 0.2;
 
     // PID
     public static double PIDExtendTolerance = 95000;

@@ -26,10 +26,9 @@ public class ClimberSubsystem extends SubsystemBase {
     // neoSpeedAngle, 0);
 
     public final CANSparkMax VerticalMotor = new CANSparkMax(5, MotorType.kBrushless);
-    public final CANSparkMax AngleAdjustmentMotor = new CANSparkMax(7, MotorType.kBrushless);
+    public final CANSparkMax AngleAdjustmentMotor = new CANSparkMax(6, MotorType.kBrushless);
 
-    public final RelativeEncoder verticalEncoder = VerticalMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor,
-            42);
+    public final RelativeEncoder verticalEncoder = VerticalMotor.getEncoder(SparkMaxRelativeEncoder.Type.kHallSensor, 42);
     public final RelativeEncoder angleEncoder = AngleAdjustmentMotor.getEncoder();
 
     // public final Encoder verticalEncoder = new Encoder(8, 9, false,
@@ -37,9 +36,9 @@ public class ClimberSubsystem extends SubsystemBase {
     // public final Encoder angleEncoder = new Encoder(2, 3, false,
     // Encoder.EncodingType.k1X);
 
-    public final DigitalInput maxRetractSwitch = new DigitalInput(4);
-    public final DigitalInput maxAngleUpSwitch = new DigitalInput(7);
-    public final DigitalInput maxAngleDownSwitch = new DigitalInput(5);
+    // public final DigitalInput maxRetractSwitch = new DigitalInput(4);
+    // public final DigitalInput maxAngleUpSwitch = new DigitalInput(7);
+    // public final DigitalInput maxAngleDownSwitch = new DigitalInput(5);
 
     PIDController pid = new PIDController(0.00000125, 0, 0);
 
@@ -73,16 +72,12 @@ public class ClimberSubsystem extends SubsystemBase {
         // Joystick drift protection
         if ((xbox.getLeftY() < .15) && (xbox.getLeftY() > -0.15)) {
             VerticalMotor.set(0);
-
-        } else if ((xbox.getLeftY() > 0) && (maxRetractSwitch.get() == false)) {
-            VerticalMotor.set(0);
-        }
         // Otherwise move the motors normally
-        else {
+        } else {
             VerticalMotor.set(-xbox.getLeftY());
 
         }
-        System.out.println("Encoder value: " + verticalEncoder.getPosition());
+        // System.out.println("Encoder value: " + verticalEncoder.getPosition());
     }
 
     /*

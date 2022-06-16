@@ -49,8 +49,7 @@ public class RobotContainer {
 
   public RobotContainer() {
 
-    CameraServer.startAutomaticCapture();
-    CameraServer.startAutomaticCapture();
+    CameraServer.startAutomaticCapture(0);
 
     configureButtonBindings();
     m_driveTrainSub.setDefaultCommand(new Drive(m_driveTrainSub));
@@ -58,13 +57,13 @@ public class RobotContainer {
 
   }
 
-  private void configureButtonBindings() {
+  private void configureButtonBindings() { 
     //System.out.println("About to configure buttons");
 
     // m_aButton.whenPressed(new AngleDownFullyCommand(m_climberSubsystem));
     // m_bButton.whenPressed(new AngleUpFullyCommand(m_climberSubsystem));
-    // m_yButton.whenPressed(new ExtendArmsFullyCommand(m_climberSubsystem));
-    // m_xButton.whenPressed(new RetractArmsFullyCommand(m_climberSubsystem));
+    m_yButton.whenPressed(new ExtendArmsFullyCommand(m_climberSubsystem));
+    m_xButton.whenPressed(new RetractArmsFullyCommand(m_climberSubsystem));
     // m_aButton.whileHeld(new SetPointCommand(m_climberSubsystem));
     m_leftBumper.whileHeld(new SetPointCommand(m_climberSubsystem));
 

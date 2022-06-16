@@ -33,7 +33,7 @@ public class AngleUpFullyCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    if ((m_subsystem.angleEncoder.getPosition() >= Constants.PIDExtendTolerance) || (m_subsystem.maxAngleUpSwitch.get() == true)) {
+    if ((m_subsystem.angleEncoder.getPosition() >= Constants.PIDExtendTolerance)) {
       return true;
     } else {
       return false;

@@ -23,7 +23,7 @@ public class RetractArmsFullyCommand extends CommandBase {
     @Override
     public void execute() {
         //System.out.println("Executing retract fully arms command");
-        m_subsystem.VerticalRetractionPID(0);
+        m_subsystem.VerticalRetractionPID(100000);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class RetractArmsFullyCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-    if ((m_subsystem.verticalEncoder.getPosition() <= Constants.PIDRetractTolerance) || (m_subsystem.maxRetractSwitch.get() == true)) {
+    if ((m_subsystem.verticalEncoder.getPosition() <= Constants.PIDRetractTolerance)){
         //System.out.println("Is finished: true");
         return true;
     }

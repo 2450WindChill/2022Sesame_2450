@@ -2,6 +2,7 @@ package frc.robot.VerticalCommands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // Extends the dynamic arms a set distance based off of a constant or stops if a limit switch is triggered

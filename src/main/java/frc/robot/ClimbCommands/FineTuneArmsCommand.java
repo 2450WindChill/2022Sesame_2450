@@ -26,13 +26,6 @@ public class FineTuneArmsCommand extends CommandBase {
   @Override
   public void execute() {
     m_subsystem.ManualInputs(RobotContainer.getClimbController());
-    if (m_subsystem.maxAngleUpSwitch.get() == true){
-      // m_subsystem.angleEncoder.reset();
-    
-    }
-    if (m_subsystem.maxRetractSwitch.get() == true){
-      // m_subsystem.verticalEncoder.reset();
-    }
   }
 
   @Override

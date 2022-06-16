@@ -2,6 +2,7 @@ package frc.robot.DriveCommands;
 
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 // Puts xbox inputs into the curvature drive

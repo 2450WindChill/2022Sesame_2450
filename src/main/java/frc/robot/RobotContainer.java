@@ -11,7 +11,7 @@ import frc.robot.AngleCommands.AngleDownFullyCommand;
 import frc.robot.DriveCommands.Drive;
 import frc.robot.VerticalCommands.ExtendArmsFullyCommand;
 import frc.robot.VerticalCommands.RetractArmsFullyCommand;
-import frc.robot.commands.AutonomousCommand;
+//import frc.robot.commands.AutonomousCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.ClimberSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
@@ -44,7 +44,7 @@ public class RobotContainer {
   public final JoystickButton m_triggerRight = new JoystickButton(driveController, 3);
 
   // Commands
-  public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this, m_driveTrainSub);
+  //public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this, m_driveTrainSub);
   // public final AutonomousCommand m_autonomousCommand = new AutonomousCommand(this);
 
   public RobotContainer() {

@@ -5,14 +5,15 @@ import frc.robot.subsystems.DriveTrainSubsystem;
 import frc.robot.Delay;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class DriveBackward extends CommandBase {
+// Drives the robot backward for 1.5 seconds
+public class DriveForward extends CommandBase {
   @SuppressWarnings({ "PMD.UnusedPrivateField", "PMD.SingularField" })
   private final DriveTrainSubsystem m_drivetrain;
-  private Delay d;
 
+  private Delay d;
   private long time = Constants.autoDriveTime;
 
-  public DriveBackward(DriveTrainSubsystem subsystem) {
+  public DriveForward(DriveTrainSubsystem subsystem) {
     m_drivetrain = subsystem;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements();

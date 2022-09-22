@@ -4,16 +4,15 @@ package frc.robot;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.XboxController.Button;
-import frc.robot.commands.AngleDownCommand;
-import frc.robot.commands.AngleUpCommand;
+import frc.robot.commands.ActivateConveyor;
 import frc.robot.commands.AutonomousCommand;
-import frc.robot.commands.SetExtendArmsCommand;
 import frc.robot.commands.Drive;
+import frc.robot.commands.FullShoot;
+import frc.robot.commands.Shoot;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ManualClimbCommand;
-import frc.robot.commands.SetRetractArmsCommand;
-import frc.robot.subsystems.ClimberSubsystem;
+import frc.robot.subsystems.ConveyorSubsystem;
 import frc.robot.subsystems.DriveTrainSubsystem;
+import frc.robot.subsystems.ShooterSubsystem;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -24,8 +23,9 @@ import frc.robot.subsystems.DriveTrainSubsystem;
  */
 public class RobotContainer {
   // Subsystems
-  public final ClimberSubsystem m_climberSubsystem = new ClimberSubsystem();
   public final static DriveTrainSubsystem m_driveTrainSub = new DriveTrainSubsystem();
+  public final static ShooterSubsystem m_shootSub = new ShooterSubsystem();
+  public final static ConveyorSubsystem m_conveyorSub = new ConveyorSubsystem();
 
   // Controllers
   public static XboxController xboxController = new XboxController(0);
@@ -33,6 +33,7 @@ public class RobotContainer {
   public final JoystickButton m_rightBumper = new JoystickButton(xboxController, Button.kRightBumper.value);
   public final JoystickButton m_yButton = new JoystickButton(xboxController, Button.kY.value);
   public final JoystickButton m_xButton = new JoystickButton(xboxController, Button.kX.value);
+  public final JoystickButton m_bButton = new JoystickButton(xboxController, Button.kB.value);
 
   public final JoystickButton m_triggerLeft = new JoystickButton(xboxController, 2);
   public final JoystickButton m_triggerRight = new JoystickButton(xboxController, 3);
@@ -49,17 +50,14 @@ public class RobotContainer {
     CameraServer.startAutomaticCapture();
     configureButtonBindings();
     m_driveTrainSub.setDefaultCommand(new Drive(m_driveTrainSub));
-    m_climberSubsystem.setDefaultCommand(new ManualClimbCommand(m_climberSubsystem));
 
   }
 
   private void configureButtonBindings() {
     System.out.println("About to configure buttons");
-    //
-    m_leftBumper.whenPressed(new AngleDownCommand(m_climberSubsystem));
-    m_rightBumper.whenPressed(new AngleUpCommand(m_climberSubsystem));
-    m_yButton.whenPressed(new SetExtendArmsCommand(m_climberSubsystem));
-    m_xButton.whenPressed(new SetRetractArmsCommand(m_climberSubsystem));
+    m_yButton.whenHeld(new Shoot(m_shootSub));
+    m_xButton.whenHeld(new ActivateConveyor(m_conveyorSub));
+    m_bButton.whenHeld(new FullShoot(m_shootSub, m_conveyorSub));
     System.out.println("Configuring buttons");
 
   }

@@ -1,4 +1,4 @@
-package frc.robot.AngleCommands;
+package frc.robot.commands.AngleCommands;
 
 import frc.robot.Constants;
 import frc.robot.subsystems.ClimberSubsystem;

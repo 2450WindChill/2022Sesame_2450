@@ -1,4 +1,4 @@
-package frc.robot.ClimbCommands;
+package frc.robot.commands.ClimbCommands;
 
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.ClimberSubsystem;

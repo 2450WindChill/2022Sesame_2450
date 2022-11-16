@@ -1,4 +1,4 @@
-package frc.robot.ClimbCommands;
+package frc.robot.commands.ClimbCommands;
 // package frc.robot.commands;
 
 // import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
